@@ -1,0 +1,20 @@
+﻿body {
+    background-color: white;
+}
+#wrapper2{
+    width:100%;
+    overflow:auto;
+
+
+}
+#granaasen bilde {
+    float: left;
+    width: auto;
+
+}
+
+#lanseplass h1{
+    float: top;
+
+}
+

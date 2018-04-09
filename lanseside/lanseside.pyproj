@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5f407c18-69f4-47ae-80c8-8f2cb8f1ac69}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>manage.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="lanseside\settings.py" />
+    <Compile Include="lanseside\urls.py" />
+    <Compile Include="lanseside\wsgi.py" />
+    <Compile Include="lanseside\__init__.py" />
+    <Compile Include="manage.py" />
+    <Compile Include="modules\Blinky.py" />
+    <Compile Include="startside\admin.py" />
+    <Compile Include="startside\apps.py" />
+    <Compile Include="startside\migrations\__init__.py" />
+    <Compile Include="startside\models.py" />
+    <Compile Include="startside\tests.py" />
+    <Compile Include="startside\urls.py" />
+    <Compile Include="startside\views.py" />
+    <Compile Include="startside\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="lanseside" />
+    <Folder Include="modules\" />
+    <Folder Include="startside\" />
+    <Folder Include="startside\migrations\" />
+    <Folder Include="C:\Users\marius\Documents\Bachelor\Software\Python_T\lanseside\startside\static\lansestyring\" />
+    <Folder Include="startside\static\lansestyring\" />
+    <Folder Include="startside\static\startside\" />
+    <Folder Include="startside\static\test\" />
+    <Folder Include="startside\templates\" />
+    <Folder Include="startside\static\" />
+    <Folder Include="C:\Users\marius\Documents\Bachelor\Software\Python_T\lanseside\startside\templates\lansestyring\" />
+    <Folder Include="startside\templates\lansestyring\" />
+    <Folder Include="startside\templates\test\" />
+    <Folder Include="startside\templates\startside\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="db.sqlite3" />
+    <Content Include="startside\static\base.css" />
+    <Content Include="startside\static\base.js" />
+    <Content Include="startside\static\lansestyring\lansestyring.js" />
+    <Content Include="startside\static\lansestyring\lansestyring.css" />
+    <Content Include="startside\static\startside\granaasen.PNG" />
+    <Content Include="startside\static\startside\lanser.css" />
+    <Content Include="startside\static\startside\lanser.js" />
+    <Content Include="startside\static\startside\startside.css" />
+    <Content Include="startside\static\startside\startside.js" />
+    <Content Include="startside\static\test\test.css" />
+    <Content Include="startside\static\test\test.js" />
+    <Content Include="startside\templates\base.html" />
+    <Content Include="startside\templates\lansestyring\lansestyring.html" />
+    <Content Include="startside\templates\startside\lanser.html" />
+    <Content Include="startside\templates\startside\startside.html" />
+    <Content Include="startside\templates\test\test.html" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>

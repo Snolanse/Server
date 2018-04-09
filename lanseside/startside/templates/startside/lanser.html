@@ -1,0 +1,57 @@
+﻿{% extends "base.html" %}
+
+
+{% block head %}
+
+<title id="tittel">Lanser</title>
+
+{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'startside/lanser.css' %}" type="text/css" />
+    <script src="{% static 'startside/lanser.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    <div id="wrapper2">
+        <div id="oversiktbilde">
+            <p>
+                <img src={% static "startside/granaasenoversikt.png" %} alt="" width="1165" height="426" usemap="#Map" class="bildeavbronner">
+                <map name="Map">
+                    <area shape="circle" coords="201,287,19" onclick="last_lanse(id)" id="bronn1">
+                    <area shape="circle" coords="245,279,19" onclick="last_lanse(id)" id="bronn2">
+                    <area shape="circle" coords="321,269,19" onclick="last_lanse(id)" id="bronn3">
+                    <area shape="circle" coords="394,258,19" onclick="last_lanse(id)" id="bronn4">
+                    <area shape="circle" coords="542,187,19" onclick="last_lanse(id)" id="bronn5">
+                    <area shape="circle" coords="574,144,19" onclick="last_lanse(id)" id="bronn6">
+                    <area shape="circle" coords="659,120,19" onclick="last_lanse(id)" id="bronn7">
+                    <area shape="circle" coords="757,91,19" onclick="last_lanse(id)" id="bronn8">
+                    <area shape="circle" coords="288,336,19" onclick="last_lanse(id)" id="bronn9">
+                    <area shape="circle" coords="353,304,19" onclick="last_lanse(id)" id="bronn10">
+                    <area shape="circle" coords="440,294,19" onclick="last_lanse(id)" id="bronn11">
+                    <area shape="circle" coords="525,271,19" onclick="last_lanse(id)" id="bronn12">
+                    <area shape="circle" coords="589,255,19" onclick="last_lanse(id)" id="bronn13">
+                    <area shape="circle" coords="630,222,19" onclick="last_lanse(id)" id="bronn14">
+                    <area shape="circle" coords="745,183,19" onclick="last_lanse(id)" id="bronn15">
+                    <area shape="circle" coords="862,133,19" onclick="last_lanse(id)" id="bronn16">
+                    <area shape="circle" coords="926,100,19" onclick="last_lanse(id)" id="bronn17">
+                    <area shape="circle" coords="1014,95,19" onclick="last_lanse(id)" id="bronn18">
+                    <area shape="circle" coords="1059,92,19" onclick="last_lanse(id)" id="bronn19">
+                    <area shape="circle" coords="782,180,19" onclick="last_lanse(id)" id="bronn20">
+                    <area shape="circle" coords="676,250,19" onclick="last_lanse(id)" id="bronn21">
+                    <area shape="circle" coords="630,274,19" onclick="last_lanse(id)" id="bronn22">
+                    <area shape="circle" coords="626,347,19" onclick="last_lanse(id)" id="bronn23">
+                    <area shape="circle" coords="564,358,19" onclick="last_lanse(id)" id="bronn24">
+                    <area shape="circle" coords="495,382,19" onclick="last_lanse(id)" id="bronn25">
+                    <area shape="circle" coords="424,383,19" onclick="last_lanse(id)" id="bronn26">
+                    <area shape="circle" coords="346,395,19" onclick="last_lanse(id)" id="bronn27">
+                </map>
+            </p>
+        </div>
+        <div id="lanseplass">
+            <h1> </h1>
+        </div>
+    </div>
+        {% endblock %}

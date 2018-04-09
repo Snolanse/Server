@@ -1,0 +1,16 @@
+﻿{% extends "base.html" %}
+
+{% block head %}
+<title id="tittel">Test</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'test/test.css' %}" type="text/css" />
+<script src="{% static 'test/test.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+
+<h2 id="led_status">LED STATUS: {{state}}</h2>
+
+<button type="button" class="btn btn-success" onclick="toggleLED()">LED</button>
+
+{% endblock %}

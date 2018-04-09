@@ -1,0 +1,23 @@
+﻿{% extends "base.html" %}
+
+
+{% block head %}
+
+<title id="tittel">Hjem</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'startside/startside.css' %}" type="text/css" />
+<script src="{% static 'startside/startside.js' %}"></script>
+
+{% endblock %}
+
+
+
+{% block body %}
+<div>
+    {% if user.is_authenticated %}
+    <h1>Innlogget som: {{ user.username }}</h1>
+    {% else %}
+    Du er ikke logget inn
+    {% endif %}
+</div>
+{% endblock %}
