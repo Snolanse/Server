@@ -1,3 +1,4 @@
+/*Deklarering av de variablene som blir brukt i koden*/
 var iknapper;
 var jsjekk;
 var kslett;
@@ -56,7 +57,7 @@ function leggtilknapper() {
 
             else if (antknapper === "2") {
 
-                document.getElementById("container1").innerHTML += "På";
+                document.getElementById("container1").innerHTML += "PÃ¥";
                 document.getElementById("anbefaltdysetekst").setAttribute("style", "visibility: visible");
             }
             else {
