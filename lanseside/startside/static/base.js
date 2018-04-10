@@ -4,10 +4,12 @@
 
 setTimeout(pressknapp, 20);
 
+/*Markerer hvilken side man er på*/
 function pressknapp() {
     document.getElementById(document.getElementById("tittel").innerHTML).setAttribute("class", 'active');
 }
 
+/*Henter cookie*/
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
