@@ -33,6 +33,10 @@ def info(request):
 def startside(request):
     return(render(request, 'startside/startside.html'))
 
+@ensure_csrf_cookie
+def csrf(request):
+    return HttpResponse('csrftag')
+
 #@ensure_csrf_cookie
 def test(request):
     if request.method == 'GET':

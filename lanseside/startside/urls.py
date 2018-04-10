@@ -8,4 +8,5 @@ urlpatterns = [
     url(r"^valgtlanse$", views.valgtlanse, name='valgtlanse'),
     url(r"^info$", views.info, name='infotest'),
     url(r"^test$", views.test, name='test'),
+    url(r"^csrf$", views.csrf, name='csrf'),
   ]
