@@ -16,43 +16,60 @@ var psjekk;
 function leggtilknapper() {
 
     antknapper = document.getElementById("ant_steg").value;
+        for (kslett = 0; kslett < stegvalgknapper.value; kslett++) {
 
-    for (kslett = 0; kslett < stegvalgknapper.value; kslett++) {
+            document.getElementById(kslett).remove();
+            document.getElementById("mark" + kslett).remove();
 
-        document.getElementById(kslett).remove();
-        document.getElementById("mark" + kslett).remove();
+        }
 
-    }
+        for (iknapper = 0; iknapper < antknapper; iknapper++) {
 
-    for (iknapper = 0; iknapper < antknapper; iknapper++) {
+            node = document.createElement("LI");
+            node.setAttribute("id", "mark" + iknapper);
+            node.setAttribute("name", "mark");
 
-        node = document.createElement("LI");
-        node.setAttribute("id", "mark" + iknapper);
-        node.setAttribute("name", "mark");
+            stegvalgknapper = document.createElement("INPUT");
+            stegvalgknapper.setAttribute("type", "radio");
+            stegvalgknapper.setAttribute("name", "radiogruppe");
+            stegvalgknapper.setAttribute("class", "radiogruppene");
+            stegvalgknapper.setAttribute("value", iknapper + 1);
+            stegvalgknapper.setAttribute("id", iknapper);
+            stegvalgknapper.setAttribute("onClick", "oppd_server(String(document.getElementById('lansenummer').value), { 'man_steg': document.getElementById('"+iknapper+"').id })")
 
-        stegvalgknapper = document.createElement("INPUT");
-        stegvalgknapper.setAttribute("type", "radio");
-        stegvalgknapper.setAttribute("name", "radiogruppe");
-        stegvalgknapper.setAttribute("class", "radiogruppene");
-        stegvalgknapper.setAttribute("value", iknapper + 1);
-        stegvalgknapper.setAttribute("id", iknapper);
+            nodelabel = document.createElement("LABEL");
+            nodelabel.setAttribute("id", "container" + iknapper);
+            nodelabel.setAttribute("class", "container");
 
-        nodelabel = document.createElement("LABEL");
-        nodelabel.setAttribute("id", "container" + iknapper);
-        nodelabel.setAttribute("class", "container");
+            nodespan = document.createElement("SPAN");
+            nodespan.setAttribute("id", "checkmark" + iknapper);
+            nodespan.setAttribute("class", "checkmark");
 
-        nodespan = document.createElement("SPAN");
-        nodespan.setAttribute("id", "checkmark" + iknapper);
-        nodespan.setAttribute("class", "checkmark");
+            document.getElementById("tekstfelt").appendChild(node);
+            document.getElementById("mark" + iknapper).appendChild(nodelabel);
+            document.getElementById("container" + iknapper).appendChild(stegvalgknapper);
+            document.getElementById("container" + iknapper).appendChild(nodespan);
 
-        document.getElementById("tekstfelt").appendChild(node);
-        document.getElementById("mark" + iknapper).appendChild(nodelabel);
-        document.getElementById("container" + iknapper).appendChild(stegvalgknapper);
-        document.getElementById("container" + iknapper).appendChild(nodespan);
+            if (stegvalgknapper.id === "0") {
+                document.getElementById("container0").innerHTML += "Av";
+            }
 
-        document.getElementById("container" + iknapper).innerHTML += "Steg nr. " + stegvalgknapper.value;
+            else if (antknapper === "2") {
 
-    }
+                document.getElementById("container1").innerHTML += "På";
+                document.getElementById("anbefaltdysetekst").setAttribute("style", "visibility: visible");
+            }
+            else {
+                document.getElementById("container" + iknapper).innerHTML += "Steg nr. " + stegvalgknapper.id;
+                document.getElementById("anbefaltdysetekst").setAttribute("style", "visibility: hidden");
+            }
+
+            if (stegvalgknapper.id === man_steg.toString()) {
+                document.getElementById(iknapper).checked = True
+            }
+
+        }
+
 }
 
 function oppdatervalgtsteg() {
@@ -63,7 +80,6 @@ function oppdatervalgtsteg() {
             valgtsteg = steg[jsjekk].value;
         }
     }
-    document.getElementById("demo").innerHTML = "valgt steg: " + valgtsteg;
 }
 
 function automan() {
@@ -91,10 +107,13 @@ function automan() {
 function onload() {
     if (document.getElementById("auto").value === "True") { document.getElementById("auto").checked = true }
     if (document.getElementById("auto").value === "False") { document.getElementById("manuell").checked = true }
-    automan()
+    //automan()
+
+
 
 }
-setTimeout(onload, 0)
+onload()
+setTimeout(automan,0);
 
 
 function oppd_server(id, datainnput) {

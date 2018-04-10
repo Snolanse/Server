@@ -1,39 +1,56 @@
 ﻿{% load static %}
 <link rel="stylesheet" href="{% static 'lansestyring/lansestyring.css' %}" type="text/css" />
 <script src="{% static 'lansestyring/lansestyring.js' %}"></script>
+<meta charset="UTF-8" />
+
+<script>
+    var True = 1;
+    var False = 0;
+    var man_steg = {{man_steg}};
+    var auto_man = {{auto_man}};
+</script>
+
 
 
 <!--{% block body %}-->
-<div id="infoomlanse">
-    <ul>
-        <li>
-            Lanse ID:
-            <input name="lansenummer" type="text" id="lansenummer" value="{{plassering_bronn}}" readonly>
-        </li>
-        <li>
-            Antall steg:
-            <input name="ant_steg" type="number" id="ant_steg" value="{{ant_steg}}" readonly />
-        </li>
-        <li>
-            Trykk:
-            <input name="trykk" type="text" id="trykk" readonly />
-        </li>
-        <li>
-            <label class="container">Auto <input name="radio" type="radio" id="auto" onclick="automan();
-    oppd_server(String(document.getElementById('lansenummer').value), { 'auto_man': 1 })" value="{{auto_man}}"> <span class="checkmark"></span></label>
-        </li>
+<div id="lanseendringer">
+    <div id="infoomlanse">
+        <div id="anbefaltdysetekst" style="visibility: hidden">
+            Anbefalt dyse: <input id="dysevalg" name="dysevalg" readonly type="text" value="Anbefaltdyse">
+        </div>
+        <ul>
+            <li>
+                Lanse ID:
+                <input name="lansenummer" type="text" id="lansenummer" value="{{plassering_bronn}}" readonly>
+            </li>
+            <li>
+                Antall steg:
+                <input name="ant_steg" type="number" id="ant_steg" value="{{ant_steg}}" readonly />
+            </li>
+            <li>
+                Trykk:
+                <input name="trykk" type="text" id="trykk" readonly />
+            </li>
+            <li>
+                <label class="container">
+                    Auto <input name="radio" type="radio" id="auto" onclick="automan();
+    oppd_server(String(document.getElementById('lansenummer').value), { 'auto_man': 1 })" value="{{auto_man}}"> <span class="checkmark"></span>
+                </label>
+            </li>
 
-        <li>
-            <label class="container">Manuell <input name="radio" type="radio" id="manuell" onclick="automan();
-    oppd_server(String(document.getElementById('lansenummer').value), { 'auto_man': 0 })" value="manuell"> <span class="checkmark"></span></label>
-        </li>
-    </ul>
+            <li>
+                <label class="container">
+                    Manuell <input name="radio" type="radio" id="manuell" onclick="automan();
+    oppd_server(String(document.getElementById('lansenummer').value), { 'auto_man': 0 })" value="manuell"> <span class="checkmark"></span>
+                </label>
+            </li>
+        </ul>
+    </div>
 </div>
-
-<div id="pershit">
+    <div id="pershit">
         <form onchange="oppdatervalgtsteg()">
             <ul id="tekstfelt"></ul>
         </form>
-</div>
+    </div>
 
-<!--{% endblock %}-->
+    <!--{% endblock %}-->

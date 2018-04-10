@@ -1,13 +1,30 @@
 
 #infoomlanse {
-    width: 35%;
+    width: 50%;
     margin-top: 10px;
     border-bottom: 5px groove;
     border-top: 5px groove;
 }
 
+#lanseendringer {
+    width: 100%;
+    float: left;
+    margin-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    /*	border-bottom: 5px groove;
+	border-top: 5px groove;
+	border-right: 5px groove;*/
+    height: auto;
+    list-style: none;
+}
+
 #infoomlanse input {
     border: hidden;
+}
+
+#anbefaltdysetekst {
+    float: right;
 }
 
     #infoomlanse ul li {
