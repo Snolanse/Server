@@ -12,9 +12,6 @@
     margin-top: 15px;
     padding-bottom: 15px;
     padding-left: 10px;
-    /*	border-bottom: 5px groove;
-	border-top: 5px groove;
-	border-right: 5px groove;*/
     height: auto;
     list-style: none;
 }
@@ -33,7 +30,7 @@
         padding: 5px;
     }
 
-/* The switch - the box around the slider */
+/* Boksen rundt glideren til knappen */
 .switch {
     position: relative;
     display: inline-block;
@@ -41,12 +38,12 @@
     height: 34px;
 }
 
-    /* Hide default HTML checkbox */
+    /* Skjuler standard HTML-checkbox */
     .switch input {
         display: none;
     }
 
-/* The slider */
+/* Glideren til knappen */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -85,7 +82,7 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-/* Rounded sliders */
+/* Lager gliderene med runde kanter */
 .slider.round {
     border-radius: 34px;
 }
@@ -108,14 +105,14 @@ input:checked + .slider:before {
     user-select: none;
 }
 
-    /* Hide the browser's default radio button */
+    /* Skjuler nettleserens radioknapper */
     .container input {
         position: absolute;
         opacity: 0;
         cursor: pointer;
     }
 
-/* Create a custom radio button */
+/* Lager egendefinert radioknapp */
 .checkmark {
     position: absolute;
     top: 6px;
@@ -126,29 +123,29 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-/* On mouse-over, add a grey background color */
+/* Grå bakgrunn når musen er over radioknappene */
 .container:hover input ~ .checkmark {
     background-color: #ccc;
 }
 
-/* When the radio button is checked, add a blue background */
+/* Gir en blå bakgrunn for den valgte radioknappen */
 .container input:checked ~ .checkmark {
     background-color: #2196F3;
 }
 
-/* Create the indicator (the dot/circle - hidden when not checked) */
+/* Legger til en dot i midten av radioknappen for å indikere valgt radioknapp */
 .checkmark:after {
     content: "";
     position: absolute;
     display: none;
 }
 
-/* Show the indicator (dot/circle) when checked */
+/* Viser dotten når knappen er valgt */
 .container input:checked ~ .checkmark:after {
     display: block;
 }
 
-/* Style the indicator (dot/circle) */
+/* Stil for dotten i midten av radioknappen */
 .container .checkmark:after {
     top: 9px;
     left: 9px;
