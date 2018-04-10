@@ -4,6 +4,8 @@
 <meta charset="UTF-8" />
 
 <script>
+    
+    /*Henter verdier fra databasen*/
     var True = 1;
     var False = 0;
     var man_steg = {{man_steg}};
@@ -11,10 +13,13 @@
 </script>
 
 
-
 <!--{% block body %}-->
+
+<!--Bestemmer feltet der all informasjon om valgt lanse skal plasseres innenfor-->
 <div id="lanseendringer">
     <div id="infoomlanse">
+        
+        <!--Felt der anbefalt dyse skal skrives-->
         <div id="anbefaltdysetekst" style="visibility: hidden">
             Anbefalt dyse: <input id="dysevalg" name="dysevalg" readonly type="text" value="Anbefaltdyse">
         </div>
@@ -31,6 +36,8 @@
                 Trykk:
                 <input name="trykk" type="text" id="trykk" readonly />
             </li>
+            
+            <!--Auto knapp-->
             <li>
                 <label class="container">
                     Auto <input name="radio" type="radio" id="auto" onclick="automan();
@@ -38,6 +45,7 @@
                 </label>
             </li>
 
+            <!--Manuell knapp-->
             <li>
                 <label class="container">
                     Manuell <input name="radio" type="radio" id="manuell" onclick="automan();
@@ -49,6 +57,7 @@
 </div>
     <div id="pershit">
         <form onchange="oppdatervalgtsteg()">
+            <!--Her blir radioknappene lagt inn-->
             <ul id="tekstfelt"></ul>
         </form>
     </div>
