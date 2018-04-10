@@ -54,11 +54,14 @@ def test(request):
         get = request.POST['get']
         if get == '1':
             if lanse.lokal_maling == 0:
-                vdata = getSData()
-                lanse.luftfukt = lfukt = vdata['hum']
-                lanse.ltrykk = vdata['press']
-                lanse.temperatur = vdata['temp_2']
-                lanse.save()
+                try:
+                    vdata = getSData()
+                    lanse.luftfukt = lfukt = vdata['hum']
+                    lanse.ltrykk = vdata['press']
+                    lanse.temperatur = vdata['temp_2']
+                    lanse.save()
+                except:
+                    print('Værserver er nede')
 
             lanse = vars(lanse)
             lansetype = vars(lansetype)
