@@ -182,7 +182,7 @@ function hent_server_data(id) {
 }
 
 function oppd_side() {
-    //window.ktrykk = 0
+    window.ktrykk = 0
     token = getCookie('csrftoken');
     data = {
         'csrfmiddlewaretoken': token,
