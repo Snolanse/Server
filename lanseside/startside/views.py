@@ -50,8 +50,10 @@ def test(request):
         lanse = Lanse.objects.all().order_by('plassering_bronn')[bronn_nr-1]
         lansetype = Lansetyper.objects.all().order_by('lanseid')[lanse.lanse_kategori-1]
         ts = time.time()
-        lanse.timestamp = ts
-        lanse.save()
+        if hasattr(request.POST,'timestamp'):
+            lanse.timestamp = request.POST['timestamp']
+            lanse.save()
+
         get = request.POST['get']
         if get == '1':
             if lanse.lokal_maling == 0:
