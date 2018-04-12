@@ -160,3 +160,60 @@ function oppd_server(id, datainnput) {
 
     posting.done();
 }
+
+function hent_server_data(id) {
+    token = getCookie('csrftoken');
+    data = {
+        'csrfmiddlewaretoken': token,
+        'get': 1,
+        'bronnid': 'bronn' + id
+
+    };
+
+    var posting = $.post("test", data);
+
+    posting.done(function (data) {
+        window.content = $(data);
+        d = $(data);
+       
+    })
+
+    return 0
+}
+
+function oppd_side() {
+    token = getCookie('csrftoken');
+    data = {
+        'csrfmiddlewaretoken': token,
+        'get': 1,
+        'bronnid': 'bronn' + document.getElementById('lansenummer').value.toString()
+
+    };
+
+    var posting = $.post("test", data);
+
+    posting.done(function (data) {
+        sidedata = $(data);
+
+        document.getElementById('temperatur').value = sidedata[0].lanse.temperatur.toString() + ' Celsius';
+        document.getElementById('vtrykk').value = sidedata[0].lanse.vtrykk.toString() + ' Bar';
+        document.getElementById('lfukt').value = sidedata[0].lanse.luftfukt;
+        m_steg = sidedata[0].lanse.man_steg.toString();
+        auto = sidedata[0].lanse.auto_man;
+
+        document.getElementById(m_steg).checked = True
+
+        if (auto == true) {
+            document.getElementById("auto").value = "True"
+        }
+        else {
+            document.getElementById("auto").value = "False"
+        }
+
+        onload()
+        automan()
+    })
+    return 0
+}
+
+setTimeout(function () { setInterval(oppd_side, 4000) }, 4000);

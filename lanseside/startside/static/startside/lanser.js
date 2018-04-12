@@ -78,24 +78,9 @@ function last_lanse(id) {
         var content = $(data);
         $("#lanseplass").empty().append(content);
         console.log('siden har blitt lastet inn')
-        setTimeout(leggtilknapper(), 200);
+        setTimeout(leggtilknapper, 200);
         console.log('kjorer med 0.2 delay')
     })
 }
 
 function go() { last_lanse('bronn2'); setTimeout(go, 1000) }
-
-function last_lanse_data(id) {
-    token = getCookie('csrftoken');
-    data = {
-        'csrfmiddlewaretoken': token,
-        'bronnid': id,
-        'get': 1
-    };
-    var posting = $.post("test", data);
-
-    posting.done(function (data) {
-        window.content = $(data);
-        document.getElementById("lanseplass").innerHTML = "temp: " + window.content[0].lanse.temperatur.toString()
-    })
-}

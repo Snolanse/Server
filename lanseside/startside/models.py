@@ -9,11 +9,11 @@ class Lanse(models.Model):
     #trykk = models.IntegerField()
 
     lokal_maling = models.BooleanField(default=0)
-    temperatur = models.IntegerField(default=0)
-    vtrykk = models.IntegerField(default=0)
-    ltrykk = models.IntegerField(default=0)
-    flow = models.IntegerField(default=0)
-    luftfukt = models.IntegerField(default=0)
+    temperatur = models.FloatField(default=0)
+    vtrykk = models.FloatField(default=0)
+    ltrykk = models.FloatField(default=0)
+    flow = models.FloatField(default=0)
+    luftfukt = models.FloatField(default=0)
     timestamp = models.IntegerField(default=0)
 
     plassering_bronn = models.IntegerField(default=0)
