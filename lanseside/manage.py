@@ -2,7 +2,7 @@
 import os
 import sys
 
-#import schedule
+import schedule
 import time
 import threading
 import yrWbPlot
@@ -10,12 +10,12 @@ import yrWbPlot
 def yrgraf():
     print('graf er i gang')
     yrWbPlot.yrplot()
-    #schedule.every(1).minutes.do(yrWbPlot.yrplot)
-    #while True:
-        #schedule.run_pending()
-        #time.sleep(1)
-    time.sleep(3600)
-    yrgraf()
+    schedule.every(1).minutes.do(yrWbPlot.yrplot)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+    #time.sleep(3600)
+    #yrgraf()
 
 if os.environ.get('RUN_MAIN') != 'true':
         t = threading.Thread(target=yrgraf, daemon=True)
