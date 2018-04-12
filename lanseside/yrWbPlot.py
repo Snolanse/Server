@@ -23,3 +23,4 @@ def yrplot():
     plt.grid(True)
 
     plt.savefig('startside/static/lansestyring/yrwb.png')
+    plt.clf()
