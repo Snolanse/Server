@@ -194,6 +194,7 @@ function oppd_side() {
     var posting = $.post("test", data);
 
     posting.done(function (data) {
+        window.content = $(data);
         sidedata = $(data);
         if (window.ktrykk == 1) { console.log('ikkekjør'); return 0}
 
@@ -218,4 +219,91 @@ function oppd_side() {
     return 0
 }
 
-setTimeout(function () { setInterval(oppd_side, 4000) }, 4000);
+setTimeout(function () { setInterval(oppd_side, 4000) }, 500);
+
+function anbefaldyse() {
+
+    /*	document.getElementById("dysevalg").value=anbefalingdyse;*/
+    rh = Number(window.content[0].lanse.luftfukt);
+    tdb = Number(window.content[0].lanse.temperatur);
+    mbpressure = Number(window.content[0].lanse.ltrykk);
+
+    es = Number(6.112 * Math.exp((17.67 * tdb) / (tdb + 243.5)));
+    e = Number(es * (rh / 100));
+
+    edifference = 1;
+    previousign = 1;
+    incr = 10;
+    twguess = 0;
+
+    dewpoint = Number(243.5 * Math.log((e) / (6.112)) / (17.67 - Math.log((e / 6.112))));
+
+    while (Math.abs(edifference) > 0.005) {
+        ewguess = 6.112 * Math.exp((17.67 * twguess) / (twguess + 243.5));
+        eguess = ewguess - mbpressure * (tdb - twguess) * 0.00066 * (1 + (0.00115 * twguess));
+        edifference = e - eguess;
+
+        if (edifference === 0) {
+            break;
+        }
+        else {
+            if (edifference < 0) {
+                cursign = -1;
+
+                if (cursign !== previousign) {
+                    previousign = cursign;
+                    incr = incr / 10;
+                }
+                else {
+                    incr = incr;
+                }
+            }
+            else {
+                cursign = 1;
+
+                if (cursign !== previousign) {
+                    previousign = cursign;
+                    incr = incr / 10;
+                }
+                else {
+                    incr = incr;
+                }
+
+            }
+        }
+        twguess = twguess + incr * previousign;
+
+    }
+    twb = Math.round(twguess * 100) / 100;
+
+    //document.getElementById("wetbulb").value = twb;
+
+
+    if ((twb <= -5) && (twb > -7)) {
+        document.getElementById("dysevalg").value = "Bruk 10-dyse";
+
+    }
+
+    if ((twb <= -7) && (twb > -9)) {
+        document.getElementById("dysevalg").value = "Bruk 20-dyse";
+
+    }
+
+    if (twb <= -9) {
+        document.getElementById("dysevalg").value = "Bruk 40-dyse";
+
+    }
+    if (twb > -5) {
+        document.getElementById("dysevalg").value = "Lager ikke snø nå";
+
+    }
+
+
+
+    /*Andre metoden å regne ut Wet-Bulb*/
+    /*twb= (tdb* Math.atan(0.151977 * Math.pow((rh + 8.313659),0.5))) +(Math.atan(tdb + rh)) - (Math.atan(rh - 1.676331)) + (0.00391838*Math.pow((rh),1.5) *Math.atan(0.023101*rh)) -4.686035;*/
+
+
+}
+setTimeout(function () { setInterval(anbefaldyse, 1000) }, 2000);
+//setInterval(anbefaldyse, 1000);
