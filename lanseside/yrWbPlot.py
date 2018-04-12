@@ -1,6 +1,8 @@
 from modules import yrdata
 from modules import lanse
-import matplotlib.pyplot as mpl
+import matplotlib as mpl
+mpl.use('Agg')
+import matplotlib.pyplot as plt
 
 def yrplot():
     wb = []
@@ -13,11 +15,11 @@ def yrplot():
 
     t = list(range(len(wb)))
 
-    mpl.plot(t,wb)
+    plt.plot(t,wb)
 
-    mpl.xlabel('Timer fra '+ data[0][0]['time'])
-    mpl.ylabel('Wetbulb Temperatur [C]')
-    mpl.title('Wetbulb fram i tid, Granåsen skisenter')
-    mpl.grid(True)
+    plt.xlabel('Timer fra '+ data[0][0]['time'])
+    plt.ylabel('Wetbulb Temperatur [C]')
+    plt.title('Wetbulb fram i tid, Granåsen skisenter')
+    plt.grid(True)
 
-    mpl.savefig('startside/static/lansestyring/yrwb.png')
+    plt.savefig('startside/static/lansestyring/yrwb.png')
