@@ -10,7 +10,7 @@ import yrWbPlot
 def yrgraf():
     print('graf er i gang')
     yrWbPlot.yrplot()
-    schedule.every(1).minutes.do(yrWbPlot.yrplot) #denne skal byttes til time
+    schedule.every(60).minutes.do(yrWbPlot.yrplot) #denne skal byttes til time
     while True:
         schedule.run_pending()
         time.sleep(10)
