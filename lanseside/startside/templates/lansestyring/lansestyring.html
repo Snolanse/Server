@@ -18,11 +18,13 @@
 <!--Bestemmer feltet der all informasjon om valgt lanse skal plasseres innenfor-->
 <div id="lanseendringer">
     <div id="infoomlanse">
-        
+
         <!--Felt der anbefalt dyse skal skrives-->
         <div id="anbefaltdysetekst" style="visibility: hidden">
             Anbefalt dyse: <input id="dysevalg" name="dysevalg" readonly type="text" value="Anbefaltdyse">
+            <img src={% static "lansestyring/yrwb.png" %} alt="" width="40%" height="40%">
         </div>
+        
         <ul>
             <li>
                 Lanse ID:
@@ -33,10 +35,17 @@
                 <input name="ant_steg" type="number" id="ant_steg" value="{{ant_steg}}" readonly />
             </li>
             <li>
-                Trykk:
-                <input name="trykk" type="text" id="trykk" readonly />
+                Temperatur:
+                <input name="temperatur" type="text" id="temperatur" value="{{temperatur}} Celsius" readonly />
             </li>
-            
+            <li>
+                Vanntrykk:
+                <input name="vtrykk" type="text" id="vtrykk" value="{{vtrykk}} Bar" readonly />
+            </li>
+            <li>
+                Luftfuktighet:
+                <input name="lfukt" type="text" id="lfukt" value="{{luftfukt}}%" readonly />
+            </li>
             <!--Auto knapp-->
             <li>
                 <label class="container">

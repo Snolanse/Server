@@ -1,9 +1,13 @@
 
 #infoomlanse {
-    width: 50%;
+    width: 100%;
     margin-top: 10px;
     border-bottom: 5px groove;
     border-top: 5px groove;
+}
+
+#infoomlanse ul {
+    width: 30%
 }
 
 #lanseendringer {
@@ -22,6 +26,7 @@
 
 #anbefaltdysetekst {
     float: right;
+    width: 70%;
 }
 
     #infoomlanse ul li {

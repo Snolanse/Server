@@ -7,11 +7,6 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 from django.contrib.auth.decorators import login_required
 from modules.lanse import getSData, wetbulb
 import time
-try:
-    from modules.Blinky import on_off
-except:
-    print('Fikk ikke lasta blinky')
-
 
 # Create your views here.
 
@@ -19,12 +14,14 @@ except:
 @ensure_csrf_cookie
 def info(request):
     if request.method == 'GET':
-        lanse = Lanse.objects.get(lanse_nr = 1)
+        #lanse = Lanse.objects.all().order_by('plassering_bronn')[1]
+        lanse = Lanse.objects.get(plassering_bronn = 1)
         lanse = vars(lanse)
         del lanse['_state']
         return JsonResponse(lanse)
     if request.method == 'POST':
-        lanse = Lanse.objects.get(lanse_nr = 1)
+        #lanse = Lanse.objects.get(lanse_nr = 1)
+        lanse = Lanse.objects.get(plassering_bronn = 1)
         lanse = vars(lanse)
         del lanse['_state']
         return JsonResponse(lanse)

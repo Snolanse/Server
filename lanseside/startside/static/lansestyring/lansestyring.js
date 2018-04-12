@@ -79,6 +79,7 @@ function leggtilknapper() {
                 
                  /*Viser ikke anbefalt dysevalg dersom lansen har flere steg*/
                 document.getElementById("anbefaltdysetekst").setAttribute("style", "visibility: hidden");
+                //document.getElementById('anbefaltdysetekst').remove()
             }
 
             if (stegvalgknapper.id === man_steg.toString()) {

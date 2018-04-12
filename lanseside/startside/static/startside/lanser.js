@@ -84,3 +84,18 @@ function last_lanse(id) {
 }
 
 function go() { last_lanse('bronn2'); setTimeout(go, 1000) }
+
+function last_lanse_data(id) {
+    token = getCookie('csrftoken');
+    data = {
+        'csrfmiddlewaretoken': token,
+        'bronnid': id,
+        'get': 1
+    };
+    var posting = $.post("test", data);
+
+    posting.done(function (data) {
+        window.content = $(data);
+        document.getElementById("lanseplass").innerHTML = "temp: " + window.content[0].lanse.temperatur.toString()
+    })
+}

@@ -2,6 +2,23 @@
 import os
 import sys
 
+import schedule
+import time
+import threading
+import yrWbPlot
+
+def yrgraf():
+    print('graf er i gang')
+    yrWbPlot.yrplot()
+    schedule.every(1).minutes.do(yrWbPlot.yrplot)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
+if os.environ.get('RUN_MAIN') != 'true':
+        t = threading.Thread(target=yrgraf, daemon=True)
+        t.start()
+
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lanseside.settings")
     try:
@@ -13,3 +30,14 @@ if __name__ == "__main__":
             "forget to activate a virtual environment?"
         ) from exc
     execute_from_command_line(sys.argv)
+
+    
+
+    #os.environ.setdefault("DJANGO_SETTINGS_MODULE", "lanseside.settings")
+
+    #from django.core.management import call_command
+    #from django.core.wsgi import get_wsgi_application 
+    #application = get_wsgi_application()
+    #call_command('runserver',  '127.0.0.1:8000')
+
+    
