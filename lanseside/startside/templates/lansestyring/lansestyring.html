@@ -49,7 +49,7 @@
             <!--Auto knapp-->
             <li>
                 <label class="container">
-                    Auto <input name="radio" type="radio" id="auto" onclick="automan();
+                    Auto <input name="radio" type="radio" id="auto" onclick="automan(); window.ktrykk = 1;
     oppd_server(String(document.getElementById('lansenummer').value), { 'auto_man': 1 })" value="{{auto_man}}"> <span class="checkmark"></span>
                 </label>
             </li>
@@ -57,7 +57,7 @@
             <!--Manuell knapp-->
             <li>
                 <label class="container">
-                    Manuell <input name="radio" type="radio" id="manuell" onclick="automan();
+                    Manuell <input name="radio" type="radio" id="manuell" onclick="automan(); window.ktrykk = 1;
     oppd_server(String(document.getElementById('lansenummer').value), { 'auto_man': 0 })" value="manuell"> <span class="checkmark"></span>
                 </label>
             </li>

@@ -43,7 +43,7 @@ function leggtilknapper() {
             stegvalgknapper.setAttribute("class", "radiogruppene");
             stegvalgknapper.setAttribute("value", iknapper + 1);
             stegvalgknapper.setAttribute("id", iknapper);
-            stegvalgknapper.setAttribute("onClick", "oppd_server(String(document.getElementById('lansenummer').value), { 'man_steg': document.getElementById('"+iknapper+"').id })")
+            stegvalgknapper.setAttribute("onClick", "window.ktrykk = 1; oppd_server(String(document.getElementById('lansenummer').value), { 'man_steg': document.getElementById('"+iknapper+"').id })")
 
             /*Legger til Tekst som står ved siden av knappene*/
             nodelabel = document.createElement("LABEL");
@@ -182,6 +182,7 @@ function hent_server_data(id) {
 }
 
 function oppd_side() {
+    //window.ktrykk = 0
     token = getCookie('csrftoken');
     data = {
         'csrfmiddlewaretoken': token,
@@ -194,6 +195,7 @@ function oppd_side() {
 
     posting.done(function (data) {
         sidedata = $(data);
+        if (window.ktrykk == 1) { console.log('ikkekjør'); return 0}
 
         document.getElementById('temperatur').value = sidedata[0].lanse.temperatur.toString() + ' Celsius';
         document.getElementById('vtrykk').value = sidedata[0].lanse.vtrykk.toString() + ' Bar';
