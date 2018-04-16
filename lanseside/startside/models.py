@@ -14,7 +14,7 @@ class Lanse(models.Model):
     ltrykk = models.FloatField(default=0)
     flow = models.FloatField(default=0)
     luftfukt = models.FloatField(default=0)
-    timestamp = models.IntegerField(default=0)
+    timestamp = models.FloatField(default=0)
 
     plassering_bronn = models.IntegerField(default=0)
     lanse_kategori = models.IntegerField(default=0)
