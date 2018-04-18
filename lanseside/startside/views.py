@@ -50,11 +50,11 @@ def test(request):
         lanse = Lanse.objects.all().order_by('plassering_bronn')[bronn_nr-1]
         lansetype = Lansetyper.objects.all().order_by('lanseid')[lanse.lanse_kategori-1]
         ts = time.time()
-        print(request.POST)
-        if hasattr(request.POST,'timestamp'):
-            lanse.timestamp = int(request.POST['timestamp'])
-            print('timestap er go')
-            lanse.save()
+        for x in request.POST:           #skriv om, er ueffektiv
+            if x == 'timestamp':
+                lanse.timestamp = ts
+                print('timestap er go')
+                lanse.save()
 
         get = request.POST['get']
         if get == '1':
