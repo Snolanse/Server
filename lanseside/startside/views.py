@@ -51,7 +51,7 @@ def test(request):
         lansetype = Lansetyper.objects.all().order_by('lanseid')[lanse.lanse_kategori-1]
         ts = time.time()
         if hasattr(request.POST,'timestamp'):
-            lanse.timestamp = request.POST['timestamp']
+            lanse.timestamp = int(request.POST['timestamp'])
             lanse.save()
 
         get = request.POST['get']
