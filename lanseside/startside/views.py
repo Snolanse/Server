@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
-from startside.models import Lanse, LED, Lansetyper
+from startside.models import Lanse, Lansetyper, Verdata
 from django.views.decorators import csrf
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.contrib.auth.decorators import login_required
@@ -60,11 +60,15 @@ def test(request):
         if get == '1':
             if lanse.lokal_maling == 0:
                 try:
-                    vdata = getSData()
-                    lanse.luftfukt = lfukt = vdata['hum']
-                    lanse.ltrykk = vdata['press']
-                    lanse.temperatur = vdata['temp_2']
+                    #vdata = getSData()
+                    ver = Verdata.objects.get(id = 1)
+                    lanse.luftfukt = lfukt = ver.hum
+                    lanse.ltrykk = ver.press
+                    lanse.temperatur = ver.temp_2
                     lanse.save()
+                    
+                    ver = vars(ver)
+                    del ver['_state']
                 except:
                     print('Værserver er nede')
 
@@ -73,7 +77,7 @@ def test(request):
             del lanse['_state']
             del lansetype['_state']
 
-            data = {'lanse':lanse, 'lansetype':lansetype}
+            data = {'lanse':lanse, 'lansetype':lansetype, 'verstasjon':ver}
 
             return JsonResponse(data)
         elif get == '0':

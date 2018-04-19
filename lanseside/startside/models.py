@@ -29,5 +29,23 @@ class Lansetyper(models.Model):
     ant_steg = models.IntegerField(default=0)
 
 
-class LED(models.Model):
-    stat = models.BooleanField()
+class Verdata(models.Model):
+    dew_2 = models.IntegerField(default=0)
+    dew_1 = models.IntegerField(default=0)
+    dew = models.IntegerField(default=0)
+    temp = models.IntegerField(default=0)
+    hum = models.IntegerField(default=0)
+    press = models.IntegerField(default=0)
+    wind = models.IntegerField(default=0)
+    gust = models.IntegerField(default=0)
+    windDir = models.IntegerField(default=0)
+    windChill = models.IntegerField(default=0)
+    rain = models.IntegerField(default=0)
+    rainRate = models.IntegerField(default=0)
+    temp_1 = models.IntegerField(default=0)
+    temp2_1 = models.IntegerField(default=0)
+    hum_1 = models.IntegerField(default=0)
+    temp_2 = models.IntegerField(default=0)
+    temp2_2 = models.IntegerField(default=0)
+    hum_2 = models.IntegerField(default=0)
+    timestamp = models.IntegerField(default=0)
