@@ -198,9 +198,9 @@ function oppd_side() {
         sidedata = $(data);
         if (window.ktrykk == 1) { console.log('ikkekjør'); return 0}
 
-        document.getElementById('temperatur').value = sidedata[0].lanse.temperatur.toString() + ' Celsius';
+        document.getElementById('temperatur').value = sidedata[0].lanse.temperatur.toString() + ' ℃';
         document.getElementById('vtrykk').value = sidedata[0].lanse.vtrykk.toString() + ' Bar';
-        document.getElementById('lfukt').value = sidedata[0].lanse.luftfukt;
+        document.getElementById('lfukt').value = sidedata[0].lanse.luftfukt + '%';
         m_steg = sidedata[0].lanse.man_steg.toString();
         auto = sidedata[0].lanse.auto_man;
 
