@@ -5,10 +5,10 @@ def yrdata():
     page = requests.get("https://www.yr.no/sted/Norge/Tr%C3%B8ndelag/Trondheim/Gran%C3%A5sen~211388/time_for_time_detaljert.html")
     page_html = page.content
     page_soup = soup(page_html, 'html.parser')
-    radata = page_soup.find("div",{"id": "Div1"}).findAll("table",{"id": "detaljert-tabell"})
+    radata = page_soup.find("div",{"id": "Div1"}).findAll("table",{"id": "detaljert-tabell"}) #henter ut data fra side
 
     json = {}
-    for count,dag in enumerate(radata):
+    for count,dag in enumerate(radata): #sorter gjennom data og lagrer
         data = dag.tbody.findAll('tr')
         dagsholder = {}
         for nr,dat in enumerate(data):

@@ -10,7 +10,7 @@ import time
 
 # Create your views here.
 
-@login_required
+@login_required     #er en side som returnerer data om lanse 1, viser at man trenger å logge inn.
 @ensure_csrf_cookie
 def info(request):
     if request.method == 'GET':
@@ -28,21 +28,21 @@ def info(request):
 
 @ensure_csrf_cookie
 def startside(request):
-    return(render(request, 'startside/startside.html'))
+    return(render(request, 'startside/startside.html')) #viser startsiden
 
-@ensure_csrf_cookie
-def csrf(request):
+@ensure_csrf_cookie     
+def csrf(request):      #enkel side som gir ut csrf tag
     return HttpResponse('csrftag')
 
 #@ensure_csrf_cookie
-def test(request):
+def test(request):  #testside, skal fjernes
     if request.method == 'GET':
         led = LED.objects.all()[0]
         state = led.stat
         args = {
             'state': state}
         return(render(request, 'test/test.html',args))
-    elif request.method == 'POST':
+    elif request.method == 'POST':                          #denne må flyttes til /data 
         bronn = request.POST['bronnid']
         #print(bronn)
         bronn_nr = int(bronn[(bronn.find('bronn'))+5:])
@@ -99,7 +99,7 @@ def test(request):
         return HttpResponse('')
 
 @ensure_csrf_cookie
-def lanser(request):
+def lanser(request):        #lansesiden, hoster bildet
     if request.method == 'GET':
         return(render(request, 'startside/lanser.html'))
     elif request.method == 'POST':
@@ -110,7 +110,7 @@ def lanser(request):
         return JsonResponse(lanse)
 
 @ensure_csrf_cookie
-def valgtlanse(request):
+def valgtlanse(request):    #siden som henter inn spesifikk lanse
     if request.method == 'GET':
         return JsonResponse({'info': 'dette var en get'})
     if request.method == 'POST':
