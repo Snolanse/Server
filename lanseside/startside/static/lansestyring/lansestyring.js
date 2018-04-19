@@ -206,7 +206,7 @@ function oppd_side() {
 
         document.getElementById(m_steg).checked = True
 
-        if (auto == true) {
+        if (auto === true) {
             document.getElementById("auto").value = "True"
         }
         else {
@@ -219,9 +219,9 @@ function oppd_side() {
     return 0
 }
 
-if (window.kjoroppdater != 1) {
+if (window.kjoroppdater !== 1) {
     setTimeout(function () { setInterval(oppd_side, 4000) }, 500);
-    window.kjoroppdater = 1
+    window.kjoroppdater = 1;
 }
 
 function anbefaldyse() {
