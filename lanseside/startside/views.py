@@ -34,69 +34,68 @@ def startside(request):
 def csrf(request):      #enkel side som gir ut csrf tag
     return HttpResponse('csrftag')
 
-#@ensure_csrf_cookie
-def test(request):  #testside, skal fjernes
-    if request.method == 'GET':
-        led = LED.objects.all()[0]
-        state = led.stat
-        args = {
-            'state': state}
-        return(render(request, 'test/test.html',args))
-    elif request.method == 'POST':                          #denne må flyttes til /data 
-        bronn = request.POST['bronnid']
-        #print(bronn)
-        bronn_nr = int(bronn[(bronn.find('bronn'))+5:])
-        #print(bronn_nr)
-        lanse = Lanse.objects.all().order_by('plassering_bronn')[bronn_nr-1]
-        lansetype = Lansetyper.objects.all().order_by('lanseid')[lanse.lanse_kategori-1]
-        ts = time.time()
-        for x in request.POST:           #skriv om, er ueffektiv
-            if x == 'timestamp':
-                lanse.timestamp = ts
-                print('timestap er go')
-                lanse.save()
+##@ensure_csrf_cookie
+#def test(request):  #testside, skal fjernes
+#    if request.method == 'GET':
+#        led = LED.objects.all()[0]
+#        state = led.stat
+#        args = {
+#            'state': state}
+#        return(render(request, 'test/test.html',args))
+#    elif request.method == 'POST':                          #denne må flyttes til /data 
+#        bronn = request.POST['bronnid']
+#        #print(bronn)
+#        bronn_nr = int(bronn[(bronn.find('bronn'))+5:])
+#        #print(bronn_nr)
+#        lanse = Lanse.objects.all().order_by('plassering_bronn')[bronn_nr-1]
+#        lansetype = Lansetyper.objects.all().order_by('lanseid')[lanse.lanse_kategori-1]
+#        ts = time.time()
 
-        get = request.POST['get']
-        if get == '1':
-            if lanse.lokal_maling == 0:
-                try:
-                    #vdata = getSData()
-                    ver = Verdata.objects.get(id = 1)
-                    lanse.luftfukt = lfukt = ver.hum
-                    lanse.ltrykk = ver.press
-                    lanse.temperatur = ver.temp_2
-                    lanse.save()
+#        if request.POST.__contains__('timestamp'):
+#            lanse.timestamp = ts
+#            lanse.save()
+
+#        get = request.POST['get']
+#        if get == '1':
+#            if lanse.lokal_maling == 0:
+#                try:
+#                    #vdata = getSData()
+#                    ver = Verdata.objects.get(id = 1)
+#                    lanse.luftfukt = lfukt = ver.hum
+#                    lanse.ltrykk = ver.press
+#                    lanse.temperatur = ver.temp_2
+#                    lanse.save()
                     
-                    ver = vars(ver)
-                    del ver['_state']
-                except:
-                    print('Værserver er nede')
+#                    ver = vars(ver)
+#                    del ver['_state']
+#                except:
+#                    print('Værserver er nede')
 
-            lanse = vars(lanse)
-            lansetype = vars(lansetype)
-            del lanse['_state']
-            del lansetype['_state']
+#            lanse = vars(lanse)
+#            lansetype = vars(lansetype)
+#            del lanse['_state']
+#            del lansetype['_state']
 
-            data = {'lanse':lanse, 'lansetype':lansetype, 'verstasjon':ver}
+#            data = {'lanse':lanse, 'lansetype':lansetype, 'verstasjon':ver}
 
-            return JsonResponse(data)
-        elif get == '0':
-            for x in request.POST:
-                if hasattr(lanse,x):
-                    setattr(lanse, x, request.POST[x] )
-            lanse.save()
+#            return JsonResponse(data)
+#        elif get == '0':
+#            for x in request.POST:
+#                if hasattr(lanse,x):
+#                    setattr(lanse, x, request.POST[x] )
+#            lanse.save()
 
-            lanse = vars(lanse)
-            lansetype = vars(lansetype)
-            del lanse['_state']
-            del lansetype['_state']
+#            lanse = vars(lanse)
+#            lansetype = vars(lansetype)
+#            del lanse['_state']
+#            del lansetype['_state']
 
-            data = {'timestamp': ts}
-            return JsonResponse(data)
-        else:
-            return JsonResponse({'error':-1})
-    else:
-        return HttpResponse('')
+#            data = {'timestamp': ts}
+#            return JsonResponse(data)
+#        else:
+#            return JsonResponse({'error':-1})
+#    else:
+#        return HttpResponse('')
 
 @ensure_csrf_cookie
 def lanser(request):        #lansesiden, hoster bildet
@@ -139,5 +138,63 @@ def valgtlanse(request):    #siden som henter inn spesifikk lanse
         finally:
             #return JsonResponse(args)
             return(render(request, 'lansestyring/lansestyring.html', args))
+    else:
+        return HttpResponse('')
+
+#@ensure_csrf_cookie
+def data(request):  
+    if request.method == 'GET':
+        return HttpResponse('')
+    elif request.method == 'POST': 
+        bronn = request.POST['bronnid']
+        #print(bronn)
+        bronn_nr = int(bronn[(bronn.find('bronn'))+5:])
+        #print(bronn_nr)
+        lanse = Lanse.objects.all().order_by('plassering_bronn')[bronn_nr-1]
+        lansetype = Lansetyper.objects.all().order_by('lanseid')[lanse.lanse_kategori-1]
+        ts = time.time()
+        if request.POST.__contains__('timestamp'):
+            lanse.timestamp = ts
+            lanse.save()
+
+        get = request.POST['get']
+        if get == '1':
+            if lanse.lokal_maling == 0:
+                try:
+                    #vdata = getSData()
+                    ver = Verdata.objects.get(id = 1)
+                    lanse.luftfukt = lfukt = ver.hum
+                    lanse.ltrykk = ver.press
+                    lanse.temperatur = ver.temp_2
+                    lanse.save()
+                    
+                    ver = vars(ver)
+                    del ver['_state']
+                except:
+                    print('Værserver er nede')
+
+            lanse = vars(lanse)
+            lansetype = vars(lansetype)
+            del lanse['_state']
+            del lansetype['_state']
+
+            data = {'lanse':lanse, 'lansetype':lansetype, 'verstasjon':ver}
+
+            return JsonResponse(data)
+        elif get == '0':
+            for x in request.POST:
+                if hasattr(lanse,x):
+                    setattr(lanse, x, request.POST[x] )
+            lanse.save()
+
+            lanse = vars(lanse)
+            lansetype = vars(lansetype)
+            del lanse['_state']
+            del lansetype['_state']
+
+            data = {'timestamp': ts}
+            return JsonResponse(data)
+        else:
+            return JsonResponse({'error':-1})
     else:
         return HttpResponse('')

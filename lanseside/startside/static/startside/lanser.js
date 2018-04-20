@@ -66,7 +66,7 @@ function min_funksjon(id) {
 //        return cookieValue;
 //}
 
-function last_lanse(id) {
+function last_lanse(id) {       //henter inn valgt lanse
     token = getCookie('csrftoken');
     data = {
             'csrfmiddlewaretoken': token,
@@ -74,7 +74,7 @@ function last_lanse(id) {
     };
     var posting = $.post("valgtlanse", data);
 
-    posting.done(function (data) {
+    posting.done(function (data) {      //plasserer hentet data ut på nettsiden
         var content = $(data);
         $("#lanseplass").empty().append(content);
         console.log('siden har blitt lastet inn')
@@ -82,5 +82,3 @@ function last_lanse(id) {
         console.log('kjorer med 0.2 delay')
     })
 }
-
-function go() { last_lanse('bronn2'); setTimeout(go, 1000) }

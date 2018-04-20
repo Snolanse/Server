@@ -142,7 +142,7 @@ function onload() {
 onload()
 setTimeout(automan,0);
 
-
+//sender informasjon til serveren
 function oppd_server(id, datainnput) {
     token = getCookie('csrftoken');
     data = {
@@ -156,11 +156,12 @@ function oppd_server(id, datainnput) {
         data[Object.keys(datainnput)[i]] = datainnput[Object.keys(datainnput)[i]];
     };
 
-    var posting = $.post("test", data);
+    var posting = $.post("data", data);
 
     posting.done();
 }
 
+//henter data fra serveren
 function hent_server_data(id) {
     token = getCookie('csrftoken');
     data = {
@@ -170,7 +171,7 @@ function hent_server_data(id) {
 
     };
 
-    var posting = $.post("test", data);
+    var posting = $.post("data", data);
 
     posting.done(function (data) {
         window.content = $(data);
@@ -181,6 +182,7 @@ function hent_server_data(id) {
     return 0
 }
 
+//henter data fra serveren og oppdaterer siden
 function oppd_side() {
     window.ktrykk = 0
     token = getCookie('csrftoken');
@@ -191,7 +193,7 @@ function oppd_side() {
 
     };
 
-    var posting = $.post("test", data);
+    var posting = $.post("data", data);
 
     posting.done(function (data) {
         window.content = $(data);
@@ -219,11 +221,13 @@ function oppd_side() {
     return 0
 }
 
+//kjører oppdateringen av siden og sikrer at denne ikke kjører flere ganger
 if (window.kjoroppdater !== 1) {
     setTimeout(function () { setInterval(oppd_side, 4000) }, 500);
     window.kjoroppdater = 1;
 }
 
+//håndterer anbefalingen av dyser
 function anbefaldyse() {
 
     /*	document.getElementById("dysevalg").value=anbefalingdyse;*/

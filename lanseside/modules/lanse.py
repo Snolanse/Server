@@ -15,7 +15,7 @@ def getSData():
     """Henter data fra værstasjon via server"""
     URL = "https://feed.metnet.no/current/"
     
-    header = {'token': "FeLQrwndUyuE5mRuuPNJ5BifQtCrcO",
+    header = {'token': "FeLQrwndUyuE5mRuuPNJ5BifQtCrcO",    #token kommer kansje til å dø om et år
               "User-Agent": "Snølanse",
               "Host": "feed.metnet.no",
               "Content-Length": "0"}
