@@ -43,7 +43,7 @@ function leggtilknapper() {
             stegvalgknapper.setAttribute("class", "radiogruppene");
             stegvalgknapper.setAttribute("value", iknapper + 1);
             stegvalgknapper.setAttribute("id", iknapper);
-            stegvalgknapper.setAttribute("onClick", "window.ktrykk = 1; oppd_server(String(document.getElementById('lansenummer').value), { 'man_steg': document.getElementById('"+iknapper+"').id })")
+            stegvalgknapper.setAttribute("onClick", "window.ktrykk = 1; oppd_server(String(document.getElementById('lansenummer').value), { 'modus': document.getElementById('"+iknapper+"').id })")
 
             /*Legger til Tekst som står ved siden av knappene*/
             nodelabel = document.createElement("LABEL");
