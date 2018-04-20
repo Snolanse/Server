@@ -7,8 +7,8 @@
     
     /*Henter verdier fra databasen*/
     var True = 1;
-    var False = 0;
-    var man_steg = {{man_steg}};
+    var False = 0; 
+    var man_steg = {{modus}};
     var auto_man = {{auto_man}};
 </script>
 
@@ -35,16 +35,18 @@
                 <input name="ant_steg" type="number" id="ant_steg" value="{{ant_steg}}" readonly />
             </li>
             <li>
-                Temperatur:
-                <input name="temperatur" type="text" id="temperatur" value="{{temperatur}} &#x2103;" readonly />
+                Lufttemperatur:
+                <input name="Lufttemperatur" type="text" id="lufttemperatur" value="{% if lokal_maling %}{{temperatur_luft}} &#x2103;"
+                       {% else %}{{temp_2}} &#x2103;" {% endif %} readonly />
             </li>
             <li>
                 Vanntrykk:
-                <input name="vtrykk" type="text" id="vtrykk" value="{{vtrykk}} Bar" readonly />
+                <input name="vtrykk" type="text" id="vtrykk" value="{{vanntrykk}} Bar" readonly />
             </li>
             <li>
                 Luftfuktighet:
-                <input name="lfukt" type="text" id="lfukt" value="{{luftfukt}}%" readonly />
+                <input name="lfukt" type="text" id="lfukt" value="{% if lokal_maling %}{{luftfukt}}%"
+                       {% else %}{{hum}}%" {% endif %} readonly />
             </li>
             <!--Auto knapp-->
             <li>

@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 from modules.lanse import getSData, wetbulb
 import time
 
+import sys, os
+
 # Create your views here.
 
 @login_required     #er en side som returnerer data om lanse 1, viser at man trenger å logge inn.
@@ -34,68 +36,6 @@ def startside(request):
 def csrf(request):      #enkel side som gir ut csrf tag
     return HttpResponse('csrftag')
 
-##@ensure_csrf_cookie
-#def test(request):  #testside, skal fjernes
-#    if request.method == 'GET':
-#        led = LED.objects.all()[0]
-#        state = led.stat
-#        args = {
-#            'state': state}
-#        return(render(request, 'test/test.html',args))
-#    elif request.method == 'POST':                          #denne må flyttes til /data 
-#        bronn = request.POST['bronnid']
-#        #print(bronn)
-#        bronn_nr = int(bronn[(bronn.find('bronn'))+5:])
-#        #print(bronn_nr)
-#        lanse = Lanse.objects.all().order_by('plassering_bronn')[bronn_nr-1]
-#        lansetype = Lansetyper.objects.all().order_by('lanseid')[lanse.lanse_kategori-1]
-#        ts = time.time()
-
-#        if request.POST.__contains__('timestamp'):
-#            lanse.timestamp = ts
-#            lanse.save()
-
-#        get = request.POST['get']
-#        if get == '1':
-#            if lanse.lokal_maling == 0:
-#                try:
-#                    #vdata = getSData()
-#                    ver = Verdata.objects.get(id = 1)
-#                    lanse.luftfukt = lfukt = ver.hum
-#                    lanse.ltrykk = ver.press
-#                    lanse.temperatur = ver.temp_2
-#                    lanse.save()
-                    
-#                    ver = vars(ver)
-#                    del ver['_state']
-#                except:
-#                    print('Værserver er nede')
-
-#            lanse = vars(lanse)
-#            lansetype = vars(lansetype)
-#            del lanse['_state']
-#            del lansetype['_state']
-
-#            data = {'lanse':lanse, 'lansetype':lansetype, 'verstasjon':ver}
-
-#            return JsonResponse(data)
-#        elif get == '0':
-#            for x in request.POST:
-#                if hasattr(lanse,x):
-#                    setattr(lanse, x, request.POST[x] )
-#            lanse.save()
-
-#            lanse = vars(lanse)
-#            lansetype = vars(lansetype)
-#            del lanse['_state']
-#            del lansetype['_state']
-
-#            data = {'timestamp': ts}
-#            return JsonResponse(data)
-#        else:
-#            return JsonResponse({'error':-1})
-#    else:
-#        return HttpResponse('')
 
 @ensure_csrf_cookie
 def lanser(request):        #lansesiden, hoster bildet
@@ -118,11 +58,13 @@ def valgtlanse(request):    #siden som henter inn spesifikk lanse
             bronn = request.POST['bronnid']
             print(bronn)
             bronn_nr = int(bronn[(bronn.find('bronn'))+5:])
-            print(bronn_nr)
             lanse = Lanse.objects.all().order_by('plassering_bronn')[bronn_nr-1]
-            lansetype = Lansetyper.objects.all().order_by('lanseid')[lanse.lanse_kategori-1]
+            lansetype = Lansetyper.objects.get(lansetype= lanse.lanse_kategori)
             ant_steg = lansetype.ant_steg
+            verstasjon = Verdata.objects.get(id=1)
 
+            verstasjon = vars(verstasjon)
+            del verstasjon['_state']
             lanse = vars(lanse)
             del lanse['_state']
             lansetype = vars(lansetype)
@@ -132,9 +74,19 @@ def valgtlanse(request):    #siden som henter inn spesifikk lanse
                 args[x] = lanse[x]
             for x in lansetype:
                 args[x] = lansetype[x]
-        except:
+            for x in verstasjon:
+                if x == 'timestamp':
+                    pass
+                else:
+                    args[x] = verstasjon[x]
+
+        except Exception as e:
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            print(exc_type, fname, exc_tb.tb_lineno)
             args[bronn] = 'ingen lanse'
             args[ant_steg] = 0
+
         finally:
             #return JsonResponse(args)
             return(render(request, 'lansestyring/lansestyring.html', args))
@@ -151,7 +103,7 @@ def data(request):
         bronn_nr = int(bronn[(bronn.find('bronn'))+5:])
         #print(bronn_nr)
         lanse = Lanse.objects.all().order_by('plassering_bronn')[bronn_nr-1]
-        lansetype = Lansetyper.objects.all().order_by('lanseid')[lanse.lanse_kategori-1]
+        lansetype = Lansetyper.objects.get(lansetype=lanse.lanse_kategori)
         ts = time.time()
         if request.POST.__contains__('timestamp'):
             lanse.timestamp = ts

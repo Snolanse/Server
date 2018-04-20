@@ -14,13 +14,13 @@ var bestemmarkering;
 var hentstegknapper;
 var psjekk;
 
-/*Funksjon for å generere radioknapper for stegvalg*/
+/*Funksjon for aa generere radioknapper for stegvalg*/
 function leggtilknapper() {
 
     /*Henter hvor mange steg lansen har fra database*/
     antknapper = document.getElementById("ant_steg").value;
         
-        /*Sletter knapper som var på siden fra før av*/ 
+        /*Sletter knapper som var på siden fra foor av*/ 
         for (kslett = 0; kslett < stegvalgknapper.value; kslett++) {
 
             document.getElementById(kslett).remove();
@@ -200,10 +200,17 @@ function oppd_side() {
         sidedata = $(data);
         if (window.ktrykk == 1) { console.log('ikkekjør'); return 0}
 
-        document.getElementById('temperatur').value = sidedata[0].lanse.temperatur.toString() + '℃';
-        document.getElementById('vtrykk').value = sidedata[0].lanse.vtrykk.toString() + ' Bar';
-        document.getElementById('lfukt').value = sidedata[0].lanse.luftfukt + '%';
-        m_steg = sidedata[0].lanse.man_steg.toString();
+        if (sidedata[0].lanse.lokal_maling) {
+            document.getElementById('lufttemperatur').value = sidedata[0].lanse.temperatur_luft.toString() + '℃';
+            document.getElementById('lfukt').value = sidedata[0].lanse.luftfukt + '%';
+        }
+        else {
+            document.getElementById('lufttemperatur').value = sidedata[0].verstasjon.temp_2.toString() + '℃';
+            document.getElementById('lfukt').value = sidedata[0].verstasjon.hum.toString() + '%';
+        }
+
+        document.getElementById('vtrykk').value = sidedata[0].lanse.vanntrykk.toString() + ' Bar';
+        m_steg = sidedata[0].lanse.modus.toString();
         auto = sidedata[0].lanse.auto_man;
 
         document.getElementById(m_steg).checked = True
@@ -231,9 +238,15 @@ if (window.kjoroppdater !== 1) {
 function anbefaldyse() {
 
     /*	document.getElementById("dysevalg").value=anbefalingdyse;*/
-    rh = Number(window.content[0].lanse.luftfukt);
-    tdb = Number(window.content[0].lanse.temperatur);
-    mbpressure = Number(window.content[0].lanse.ltrykk);
+    if (Number(window.content[0].lanse.lokal_maling)) {
+        rh = Number(window.content[0].lanse.luftfukt);
+        tdb = Number(window.content[0].lanse.temperatur_luft);
+    }
+    else {
+        rh = Number(window.content[0].verstasjon.hum);
+        tdb = Number(window.content[0].verstasjon.temp_2);
+    }
+    mbpressure = Number(window.content[0].verstasjon.press);
 
     es = Number(6.112 * Math.exp((17.67 * tdb) / (tdb + 243.5)));
     e = Number(es * (rh / 100));
