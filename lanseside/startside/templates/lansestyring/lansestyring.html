@@ -41,7 +41,7 @@
             </li>
             <li>
                 Vanntrykk:
-                <input name="vtrykk" type="number" id="vtrykk" value="{{vanntrykk}} Bar" readonly />
+                <input name="vtrykk" type="number" onchange="(function(el){el.value=parseFloat(el.value).toFixed(0);})(this)" id="vtrykk" value="{{vanntrykk}} Bar" readonly />
             </li>
             <li>
                 Luftfuktighet:
