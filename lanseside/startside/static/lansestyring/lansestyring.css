@@ -1,24 +1,29 @@
 
+
 #infoomlanse {
     width: 100%;
     margin-top: 10px;
-    border-top: 5px groove;
-    border-bottom: 5px groove;
+    border-bottom:5px groove;
+        padding-left:10px;
 }
 
 #infoomlanse ul {
     width: 30%
-}
 
+}
+#tekstfelt{
+    padding-left:50px;
+}
 #lanseendringer {
     width: 100%;
     float: left;
     margin-top: 15px;
     padding-bottom: 15px;
-    padding-left: 10px;
+
     height: auto;
     list-style: none;
-    border-bottom: 5px groove;
+    border-bottom:5px groove;
+    border-top:5px groove;
 }
 
 #infoomlanse input {
@@ -33,7 +38,7 @@
     #infoomlanse ul li {
         margin-top: auto;
         list-style-type: none;
-        padding-top: 5px;
+
     }
 
 /* Boksen rundt glideren til knappen */
