@@ -1,6 +1,8 @@
 from django.conf.urls import url, include
 from . import views
-from django.contrib.auth.views import login
+#from django.contrib.auth.views import login
+from django.contrib import admin
+#from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r"^$", views.startside, name='startside'),
@@ -10,4 +12,6 @@ urlpatterns = [
     #url(r"^test$", views.test, name='test'),
     url(r"^csrf$", views.csrf, name='csrf'),
     url(r"^data$", views.data, name='data'),
+    url(r'^login$', views.mylogin, name='login'),
+    url(r'^logout$', views.mylogout, name='logout'),
   ]

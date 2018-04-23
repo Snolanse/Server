@@ -6,3 +6,12 @@
 #innloginfo {
     width: 100%;
 }
+
+#containerloginn {
+    width: 30%;
+    margin-left: 20px;
+}
+
+#logoutButton {
+    width:auto;
+}

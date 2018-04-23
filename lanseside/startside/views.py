@@ -6,6 +6,8 @@ from django.views.decorators import csrf
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.contrib.auth.decorators import login_required
 from modules.lanse import getSData, wetbulb
+from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponseRedirect
 import time
 
 import sys, os
@@ -37,7 +39,8 @@ def csrf(request):      #enkel side som gir ut csrf tag
     return HttpResponse('csrftag')
 
 
-@ensure_csrf_cookie
+@login_required
+#@ensure_csrf_cookie
 def lanser(request):        #lansesiden, hoster bildet
     if request.method == 'GET':
         return(render(request, 'startside/lanser.html'))
@@ -47,6 +50,7 @@ def lanser(request):        #lansesiden, hoster bildet
         lanse = vars(lanse)
         del lanse['_state']
         return JsonResponse(lanse)
+
 
 @ensure_csrf_cookie
 def valgtlanse(request):    #siden som henter inn spesifikk lanse
@@ -150,3 +154,22 @@ def data(request):
             return JsonResponse({'error':-1})
     else:
         return HttpResponse('')
+
+
+def mylogin(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect('/')
+        else:
+            print('bg, nologin')
+            return HttpResponseRedirect('/')
+    else:
+        return HttpResponseRedirect('/')
+
+def mylogout(request):
+    logout(request)
+    return HttpResponseRedirect('/')
