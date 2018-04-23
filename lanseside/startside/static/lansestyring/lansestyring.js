@@ -230,7 +230,7 @@ function oppd_side() {
 
 //kjører oppdateringen av siden og sikrer at denne ikke kjører flere ganger
 if (window.kjoroppdater !== 1) {
-    setTimeout(function () { setInterval(oppd_side, 500) }, 500);
+    setTimeout(function () { setInterval(oppd_side, 1200) }, 500);
     window.kjoroppdater = 1;
 }
 
