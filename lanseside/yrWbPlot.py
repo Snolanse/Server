@@ -3,6 +3,7 @@ from modules import lanse
 import matplotlib as mpl
 mpl.use('Agg')
 import matplotlib.pyplot as plt
+import datetime
 
 def yrplot(): #lager et plot av wetbulb med data fra yr
     wb = []
@@ -16,8 +17,8 @@ def yrplot(): #lager et plot av wetbulb med data fra yr
     t = list(range(len(wb)))
 
     plt.plot(t,wb)
-
-    plt.xlabel('Timer fra '+ data[0][0]['time'])
+    
+    plt.xlabel('Timer fra '+ data[0][0]['time']+ ', ' +  str(datetime.date.today().day) + '/' + str(datetime.date.today().month) + '-' +str(datetime.date.today().year))
     plt.ylabel('Wetbulb Temperatur [C]')
     plt.title('Wetbulb fram i tid, Granåsen skisenter')
     plt.grid(True)
