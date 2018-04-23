@@ -2,7 +2,6 @@
 #infoomlanse {
     width: 100%;
     margin-top: 10px;
-    border-bottom: 5px groove;
     border-top: 5px groove;
 }
 
@@ -18,6 +17,7 @@
     padding-left: 10px;
     height: auto;
     list-style: none;
+    border-bottom: 5px groove;
 }
 
 #infoomlanse input {
