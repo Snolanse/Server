@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
-from startside.models import Lanse, Lansetyper, Verdata
+from startside.models import Lanse, Lansetype, Verdata
 from django.views.decorators import csrf
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.contrib.auth.decorators import login_required
@@ -63,7 +63,7 @@ def valgtlanse(request):    #siden som henter inn spesifikk lanse
             print(bronn)
             bronn_nr = int(bronn[(bronn.find('bronn'))+5:])
             lanse = Lanse.objects.all().order_by('plassering_bronn')[bronn_nr-1]
-            lansetype = Lansetyper.objects.get(lansetype= lanse.lanse_kategori)
+            lansetype = Lansetype.objects.get(lansetype= lanse.lanse_kategori)
             ant_steg = lansetype.ant_steg
             verstasjon = Verdata.objects.get(id=1)
 
@@ -107,11 +107,13 @@ def data(request):
         bronn_nr = int(bronn[(bronn.find('bronn'))+5:])
         #print(bronn_nr)
         lanse = Lanse.objects.all().order_by('plassering_bronn')[bronn_nr-1]
-        lansetype = Lansetyper.objects.get(lansetype=lanse.lanse_kategori)
+        lansetype = Lansetype.objects.get(lansetype=lanse.lanse_kategori)
         ts = time.time()
         if request.POST.__contains__('timestamp'):
             lanse.timestamp = ts
             lanse.save()
+            logg = langtidslagring(lanse_id=lanse.plassering_bronn, steg=lanse.modus, timestamp=ts, vanntrykk=lanse.vanntrykk)
+            logg.save()
 
         get = request.POST['get']
         if get == '1':
@@ -141,6 +143,9 @@ def data(request):
             for x in request.POST:
                 if hasattr(lanse,x):
                     setattr(lanse, x, request.POST[x] )
+                elif x == 'lanse_kategori':
+                    if Lansetype.objects.filter(lansetype=request.POST[x]).exists():
+                        lanse.lanse_kategori_id = Lansetype.objects.get(lansetype=x).id
             lanse.save()
 
             lanse = vars(lanse)
