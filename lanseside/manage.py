@@ -26,7 +26,7 @@ def hentDataFraVerstasjon():
 
 def planlagtArbeid(): #denne threaden skal ta seg av alle tidsbestemte oppgaver
     print('thread er i gang')
-    yrWbPlot.yrplot()
+    #yrWbPlot.yrplot()
     print('kjor yrplot')
     hentDataFraVerstasjon()
     print("henter data fra verstasjon")
