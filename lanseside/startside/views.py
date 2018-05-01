@@ -151,7 +151,7 @@ def data(request):
                 if hasattr(lanse,x):
                     if x == 'lanse_kategori':
                         if Lansetype.objects.filter(lansetype=request.POST[x]).exists():
-                            lanse(lanse_kategori = Lansetype.objects.get(lansetype=x))
+                            lanse.lanse_kategori = Lansetype.objects.get(lansetype=x)
                     else:
                         setattr(lanse, x, request.POST[x] )
                 

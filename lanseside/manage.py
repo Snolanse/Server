@@ -34,7 +34,7 @@ def planlagtArbeid(): #denne threaden skal ta seg av alle tidsbestemte oppgaver
     schedule.every(1).minutes.do(hentDataFraVerstasjon)
     print("scheduler")
     while True:
-        print("arbeidsthread")
+        #print("arbeidsthread")
         schedule.run_pending()
         time.sleep(10)
     #time.sleep(3600)
