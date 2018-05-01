@@ -28,8 +28,10 @@ def planlagtArbeid(): #denne threaden skal ta seg av alle tidsbestemte oppgaver
     print('thread er i gang')
     yrWbPlot.yrplot()
     hentDataFraVerstasjon()
+    print("henter data fra verstasjon")
     schedule.every(60).minutes.do(yrWbPlot.yrplot)
     schedule.every(1).minutes.do(hentDataFraVerstasjon)
+    print("scheduler")
     while True:
         print("arbeidsthread")
         schedule.run_pending()
