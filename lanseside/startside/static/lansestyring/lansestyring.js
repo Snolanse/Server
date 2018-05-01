@@ -238,7 +238,7 @@ function oppd_side() {
 
 }
 
-kjører oppdateringen av siden og sikrer at denne ikke kjører flere ganger
+//kjører oppdateringen av siden og sikrer at denne ikke kjører flere ganger
 if (window.kjoroppdater !== 1) {
     setTimeout(oppd_side, 200)
     window.kjoroppdater = 1;
