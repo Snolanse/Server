@@ -184,55 +184,67 @@ function hent_server_data(id) {
 
 //henter data fra serveren og oppdaterer siden
 function oppd_side() {
-    window.ktrykk = 0
-    token = getCookie('csrftoken');
-    data = {
-        'csrfmiddlewaretoken': token,
-        'get': 1,
-        'bronnid': 'bronn' + document.getElementById('lansenummer').value.toString()
+        window.ktrykk = 0
+        token = getCookie('csrftoken');
+        data = {
+            'csrfmiddlewaretoken': token,
+            'get': 1,
+            'bronnid': 'bronn' + document.getElementById('lansenummer').value.toString()
 
-    };
+        };
 
-    var posting = $.post("data", data);
+        var posting = $.post("data", data);
 
-    posting.done(function (data) {
-        window.content = $(data);
-        sidedata = $(data);
-        if (window.ktrykk == 1) { console.log('ikkekjør'); return 0}
+        posting.done(function (data) {
+            window.content = $(data);
+            sidedata = $(data);
+            if (window.ktrykk == 1) { console.log('ikkekjør'); return 0 }
 
-        if (sidedata[0].lanse.lokal_maling) {
-            document.getElementById('lufttemperatur').value = sidedata[0].lanse.temperatur_luft.toString() + '℃';
-            document.getElementById('lfukt').value = sidedata[0].lanse.luftfukt + '%';
-        }
-        else {
-            document.getElementById('lufttemperatur').value = sidedata[0].verstasjon.temp_2.toString() + '℃';
-            document.getElementById('lfukt').value = sidedata[0].verstasjon.hum.toString() + '%';
-        }
+            if (sidedata[0].lanse.lokal_maling) {
+                document.getElementById('lufttemperatur').value = sidedata[0].lanse.temperatur_luft.toString() + '℃';
+                document.getElementById('lfukt').value = sidedata[0].lanse.luftfukt + '%';
+            }
+            else {
+                document.getElementById('lufttemperatur').value = sidedata[0].verstasjon.temp_2.toString() + '℃';
+                document.getElementById('lfukt').value = sidedata[0].verstasjon.hum.toString() + '%';
+            }
 
-        document.getElementById('vtrykk').value = sidedata[0].lanse.vanntrykk.toString() + ' Bar';
-        m_steg = sidedata[0].lanse.modus.toString();
-        auto = sidedata[0].lanse.auto_man;
+            document.getElementById('vtrykk').value = sidedata[0].lanse.vanntrykk.toString() + ' Bar';
+            m_steg = sidedata[0].lanse.modus.toString();
+            auto = sidedata[0].lanse.auto_man;
 
-        document.getElementById(m_steg).checked = True
+            document.getElementById(m_steg).checked = True
 
-        if (auto === true) {
-            document.getElementById("auto").value = "True"
-        }
-        else {
-            document.getElementById("auto").value = "False"
-        }
+            if (auto === true) {
+                document.getElementById("auto").value = "True"
+            }
+            else {
+                document.getElementById("auto").value = "False"
+            }
 
-        onload()
-        automan()
-    })
-    return 0
+            onload()
+            automan()
+
+            setTimeout(oppd_side, 1000)
+        })
+
+        posting.fail(function () {
+            console.log('feil ved henting av data')
+            alert("Ingen kontakt med server\nTrykk ok for å prøve på nytt"); 
+            setTimeout(oppd_side, 3000)
+        })
+        return 0
+    
+
 }
+
+setTimeout(oppd_side,200)
 
 //kjører oppdateringen av siden og sikrer at denne ikke kjører flere ganger
-if (window.kjoroppdater !== 1) {
-    setTimeout(function () { setInterval(oppd_side, 1200) }, 500);
-    window.kjoroppdater = 1;
-}
+//if (window.kjoroppdater !== 1) {
+//    setTimeout(function () { setInterval(oppd_side, 1200) }, 500);
+//    window.kjoroppdater = 1;
+//}
 
 //håndterer anbefalingen av dyser
 function anbefaldyse() {

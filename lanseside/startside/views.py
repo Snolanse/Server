@@ -14,21 +14,23 @@ import sys, os
 
 # Create your views here.
 
-@login_required     #er en side som returnerer data om lanse 1, viser at man trenger å logge inn.
+@login_required     #er en side som returnerer data om alle lanser
 @ensure_csrf_cookie
 def info(request):
     if request.method == 'GET':
-        #lanse = Lanse.objects.all().order_by('plassering_bronn')[1]
-        lanse = Lanse.objects.get(plassering_bronn = 1)
-        lanse = vars(lanse)
-        del lanse['_state']
-        return JsonResponse(lanse)
-    if request.method == 'POST':
-        #lanse = Lanse.objects.get(lanse_nr = 1)
-        lanse = Lanse.objects.get(plassering_bronn = 1)
-        lanse = vars(lanse)
-        del lanse['_state']
-        return JsonResponse(lanse)
+        return(render(request, 'Info/Info.html')) #viser infosiden
+    if request.method == 'POST':            #skal returnere all data
+        lanser_objhold = Lanse.objects.all()
+        lanser = {}
+        for x in range(len(lanser_objhold)):
+            lanser[x] = vars(lanser_objhold[x])
+            del lanser[x]['_state']
+        return JsonResponse(lanser)
+
+@login_required
+def master(request):
+    if request.method == 'GET':
+        return(render(request, 'Master/Master.html')) #viser mastersiden
 
 @ensure_csrf_cookie
 def startside(request):

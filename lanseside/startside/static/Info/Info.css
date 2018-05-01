@@ -1,0 +1,14 @@
+#innholdwrapper {
+    display: inherit;
+    width: 100%
+}
+
+#oversiktlanse1, #oversiktlanse2, #oversiktlanse3, #oversiktlanse4, #oversiktlanse5, #oversiktlanse6, #oversiktlanse7, #oversiktlanse8, #oversiktlanse9, #oversiktlanse10, #oversiktlanse11, #oversiktlanse12, #oversiktlanse13, #oversiktlanse14, #oversiktlanse15, #oversiktlanse16, #oversiktlanse17, #oversiktlanse18, #oversiktlanse19, #oversiktlanse20, #oversiktlanse21, #oversiktlanse22, #oversiktlanse23, #oversiktlanse24, #oversiktlanse25, #oversiktlanse26, #oversiktlanse27 {
+    width: 33%;
+    border: solid 1px black;
+    float: left;
+}
+
+#innholdwrapper li {
+    list-style: none;
+}
