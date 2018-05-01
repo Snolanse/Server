@@ -11,7 +11,7 @@ from modules import lanse
 import sqlite3
 
 def hentDataFraVerstasjon():
-    verstasjonData = lanse.getSData()   #henter data fra værstasjon
+    verstasjonData = lanse.getSData()   #henter data fra veerstasjon
     conn = sqlite3.connect('db.sqlite3')
     c = conn.cursor()
     c.execute('SELECT * FROM startside_verdata')
@@ -37,7 +37,7 @@ def planlagtArbeid(): #denne threaden skal ta seg av alle tidsbestemte oppgaver
     #time.sleep(3600)
     #yrgraf()
 
-if os.environ.get('RUN_MAIN') != 'true':        #sjekker hvilken 'thread' man kjører i for å unngå dobbelkjøring
+if os.environ.get('RUN_MAIN') != 'true':        #sjekker hvilken 'thread' man kjører i for å unngå dobbelkjoring
     t = threading.Thread(target=planlagtArbeid, daemon=True)
     t.start()
 
