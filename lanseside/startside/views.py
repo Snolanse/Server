@@ -21,8 +21,13 @@ def info(request):
         return(render(request, 'Info/Info.html')) #viser infosiden
     if request.method == 'POST':            #skal returnere all data
         lanser_objhold = Lanse.objects.all()
+        verdata = Verdata.objects.get(id=1)
         lanser = {}
         for x in range(len(lanser_objhold)):
+            if lanser_objhold[x].lokal_maling == 0:
+                lanser_objhold[x].luftfukt = verdata.hum
+                lanser_objhold[x].temperatur_luft = verdata.temp_2
+
             lanser[x] = vars(lanser_objhold[x])
             del lanser[x]['_state']
         return JsonResponse(lanser)
