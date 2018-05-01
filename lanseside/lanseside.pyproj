@@ -51,8 +51,12 @@
   <ItemGroup>
     <Content Include="startside\static\base.css" />
     <Content Include="startside\static\base.js" />
+    <Content Include="startside\static\Info\Info.css" />
+    <Content Include="startside\static\Info\Info.js" />
     <Content Include="startside\static\lansestyring\lansestyring.css" />
     <Content Include="startside\static\lansestyring\lansestyring.js" />
+    <Content Include="startside\static\Master\Master.css" />
+    <Content Include="startside\static\Master\Master.js" />
     <Content Include="startside\static\startside\granaasen.PNG" />
     <Content Include="startside\static\startside\granaasenoversikt.png" />
     <Content Include="startside\static\startside\lanser.css" />
@@ -62,7 +66,9 @@
     <Content Include="startside\static\test\test.css" />
     <Content Include="startside\static\test\test.js" />
     <Content Include="startside\templates\base.html" />
+    <Content Include="startside\templates\Info\Info.html" />
     <Content Include="startside\templates\lansestyring\lansestyring.html" />
+    <Content Include="startside\templates\Master\Master.html" />
     <Content Include="startside\templates\startside\lanser.html" />
     <Content Include="startside\templates\startside\startside.html" />
     <Content Include="startside\templates\test\test.html" />
@@ -73,11 +79,15 @@
     <Folder Include="startside" />
     <Folder Include="startside\migrations" />
     <Folder Include="startside\static" />
+    <Folder Include="startside\static\Info\" />
     <Folder Include="startside\static\lansestyring" />
+    <Folder Include="startside\static\Master\" />
     <Folder Include="startside\static\startside" />
     <Folder Include="startside\static\test" />
     <Folder Include="startside\templates" />
+    <Folder Include="startside\templates\Info\" />
     <Folder Include="startside\templates\lansestyring" />
+    <Folder Include="startside\templates\Master\" />
     <Folder Include="startside\templates\startside" />
     <Folder Include="startside\templates\test" />
   </ItemGroup>
