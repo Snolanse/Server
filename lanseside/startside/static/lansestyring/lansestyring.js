@@ -229,7 +229,7 @@ function oppd_side() {
 
     posting.fail(function () {
         console.log('feil ved henting av data')
-        alert("Ingen kontakt med server\nTrykk ok for å prøve på nytt"); 
+        setTimeout(function () { alert("Ingen kontakt med server\nTrykk ok for å prøve på nytt") },1); 
         setTimeout(oppd_side, 3000)
     })
     return 0

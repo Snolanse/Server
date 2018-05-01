@@ -16,7 +16,7 @@
 
     posting.fail(function () {
         console.log('feil ved henting av data')
-        alert("Ingen kontakt med server\nTrykk ok for å prøve på nytt"); 
+        setTimeout(function () { alert("Ingen kontakt med server\nTrykk ok for å prøve på nytt") }, 1); 
         setTimeout(last_lansedata, 3000)
     })
 }

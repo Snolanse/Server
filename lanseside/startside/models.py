@@ -72,21 +72,3 @@ class langtidslagring(models.Model):
     steg = models.IntegerField(default=-1)
     #vanntrykk = models.FloatField(default=-1)
 
-
-
-
-
-class Category(models.Model):
-    class Meta:
-        verbose_name_plural = "Categories"
-
-    name = models.CharField(max_length=32, null=True)
-
-    def __str__(self):
-        return self.name
-
-class test(models.Model):
-    name = models.CharField(max_length=32)
-    age = models.IntegerField(default=0)
-
-    categori = models.ForeignKey(Category, null=True, on_delete=models.SET_NULL)

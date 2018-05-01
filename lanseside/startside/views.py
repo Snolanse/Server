@@ -149,10 +149,12 @@ def data(request):
         elif get == '0':
             for x in request.POST:
                 if hasattr(lanse,x):
-                    setattr(lanse, x, request.POST[x] )
-                elif x == 'lanse_kategori':
-                    if Lansetype.objects.filter(lansetype=request.POST[x]).exists():
-                        lanse.lanse_kategori_id = Lansetype.objects.get(lansetype=x).id
+                    if x == 'lanse_kategori':
+                        if Lansetype.objects.filter(lansetype=request.POST[x]).exists():
+                            lanse.lanse_kategori_id = Lansetype.objects.get(lansetype=x).id
+                    else:
+                        setattr(lanse, x, request.POST[x] )
+                
             lanse.save()
 
             lanse = vars(lanse)
