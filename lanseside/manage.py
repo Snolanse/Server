@@ -37,7 +37,7 @@ def planlagtArbeid(): #denne threaden skal ta seg av alle tidsbestemte oppgaver
     #time.sleep(3600)
     #yrgraf()
 
-if os.environ.get('RUN_MAIN') != 'true':        #sjekker hvilken 'thread' man kjører i for å unngå dobbelkjoring
+if os.environ.get('RUN_MAIN') != 'true':        #sjekker hvilken 'thread' man kjorer i for å unngå dobbelkjoring
     t = threading.Thread(target=planlagtArbeid, daemon=True)
     t.start()
 
