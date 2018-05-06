@@ -1,0 +1,22 @@
+#innholdswrappermaster {
+    /*    border: solid black 1px;*/
+    padding: 10px;
+    padding-top: 20px;
+    float: left;
+    width: auto;
+    list-style: none;
+}
+
+    #innholdswrappermaster ul {
+        list-style: none;
+    }
+
+#submit, #masterauto, #masterman {
+    font-family: inherit;
+    font-size: 100%;
+    padding: 2px;
+    color: black;
+    border: 1px solid grey;
+    background-color: #E6E6E6;
+    text-decoration: none;
+}

@@ -36,6 +36,16 @@ def info(request):
 def master(request):
     if request.method == 'GET':
         return(render(request, 'Master/Master.html')) #viser mastersiden
+    elif request.method == 'POST':
+        if request.POST['auto_man_samtlige'] == '1':
+            print("alle i auto")
+            allelanser = Lanse.objects.all()
+            allelanser.update(auto_man=1)
+        elif request.POST['auto_man_samtlige'] == '0':
+            print("alle i man")
+            allelanser = Lanse.objects.all()
+            allelanser.update(auto_man=0)
+        return JsonResponse({'timestamp':time.time()})
 
 @ensure_csrf_cookie
 def startside(request):
