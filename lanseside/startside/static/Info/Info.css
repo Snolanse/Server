@@ -12,3 +12,9 @@
 #innholdwrapper li {
     list-style: none;
 }
+
+#varsellampe {
+    width: 5%;
+    height: 5%;
+    float: right;
+}

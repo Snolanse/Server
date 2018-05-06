@@ -30,6 +30,14 @@ function oppd_data(content) {
         document.getElementById("flowlanse" + (i + 1).toString()).innerHTML = "Flow: " + content[0][i].flow.toString()
         document.getElementById("trykklanse" + (i + 1).toString()).innerHTML = "Trykk: " + content[0][i].vanntrykk.toString()
         document.getElementById("valgtstegnrlanse" + (i + 1).toString()).innerHTML = "Valgt steg: " + content[0][i].modus.toString()
+
+        if ((new Date().getTime() - content[0][i].timestamp) > (60 * 1000)) {
+            document.getElementById("oversiktlanse" + (i+1).toString()).style.background = "#F56666";
+        }
+        else {
+            document.getElementById("oversiktlanse" + (i + 1).toString()).style.background = "white";
+        }
+
     }
 }
 
