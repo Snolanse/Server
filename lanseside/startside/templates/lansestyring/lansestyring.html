@@ -9,7 +9,19 @@
     var True = 1;
     var False = 0; 
     var man_steg = {{modus}};
-    var auto_man = {{auto_man}};
+    var auto_man = {{auto_man }};
+
+    document.onkeydown = function (ev) {        //disabler piltaster
+        var key;
+        ev = ev || event;
+        key = ev.keyCode;
+        if (key == 37 || key == 38 || key == 39 || key == 40) {
+
+            ev.cancelBubble = true;
+            ev.returnValue = false;
+        }
+
+    }
 </script>
 
 
