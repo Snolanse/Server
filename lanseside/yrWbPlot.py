@@ -18,7 +18,7 @@ def yrplot(): #lager et plot av wetbulb med data fra yr
 
     plt.plot(t,wb)
     
-    plt.xlabel('Timer fra '+ data[0][0]['time']+ ', ' +  str(datetime.date.today().day) + '/' + str(datetime.date.today().month) + '-' +str(datetime.date.today().year) + '\nVærvarsel fra Yr levert av Meteorologisk institutt og NRK')
+    plt.xlabel('Timer fra '+ data[0][0]['time']+ ', ' +  str(datetime.date.today().day) + '/' + str(datetime.date.today().month) + '-' +str(datetime.date.today().year) + '\nVervarsel fra Yr levert av Meteorologisk institutt og NRK')
     plt.ylabel('Wetbulb Temperatur [C]')
     plt.title('Wetbulb fram i tid, Granåsen skisenter')
     plt.grid(True)
