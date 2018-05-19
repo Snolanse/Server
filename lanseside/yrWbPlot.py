@@ -12,7 +12,8 @@ def yrplot(): #lager et plot av wetbulb med data fra yr
     for x in data:
         for y in data[x]:
             data[x][y]
-            wb.append(lanse.wetbulb(int(data[x][y]['temp']),int(data[x][y]['luftfukt'][0:-1]))) #sorterer data
+            #wb.append(lanse.wetbulb(int(data[x][y]['temp']),int(data[x][y]['luftfukt'][0:-1]))) #sorterer data
+            wb.append(lanse.wetBulbMedAtmTrykk(int(data[x][y]['luftfukt'][0:-1]),int(data[x][y]['temp']),int(data[x][y]['trykk'][0:-4]))) #sorterer data
 
     t = list(range(len(wb)))
 

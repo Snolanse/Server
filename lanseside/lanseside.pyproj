@@ -27,7 +27,6 @@
     <Compile Include="modules\Blinky.py" />
     <Compile Include="modules\lanse.py" />
     <Compile Include="modules\yrdata.py" />
-    <Compile Include="modules\yrWbPlot.py" />
     <Compile Include="modules\__init__.py" />
     <Compile Include="startside\admin.py" />
     <Compile Include="startside\apps.py" />

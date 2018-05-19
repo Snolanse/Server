@@ -11,18 +11,29 @@ from modules import lanse
 import sqlite3
 
 def hentDataFraVerstasjon():
-    verstasjonData = lanse.getSData()   #henter data fra veerstasjon
-    conn = sqlite3.connect('db.sqlite3')
-    c = conn.cursor()
-    c.execute('SELECT * FROM startside_verdata')
-    names = list(map(lambda x: x[0], c.description)) #henter ut navn i rad fra database
+    try:
+        verstasjonData = lanse.getSData()   #henter data fra veerstasjon
+        conn = sqlite3.connect('db.sqlite3')
+        c = conn.cursor()
+        c.execute('SELECT * FROM startside_verdata')
+        names = list(map(lambda x: x[0], c.description)) #henter ut navn i rad fra database
 
-    for x in names: #om verdata stemmer overends med database, lagre data
-        if x in verstasjonData:
-            c.execute('UPDATE startside_verdata SET {}={}'.format(x,verstasjonData[x]))
+        for x in names: #om verdata stemmer overends med database, lagre data
+            if x in verstasjonData:
+                c.execute('UPDATE startside_verdata SET {}={}'.format(x,verstasjonData[x]))
 
-    conn.commit()
-    conn.close() #lagre inn i database
+        conn.commit()
+        conn.close() #lagre inn i database
+    except:
+        time.sleep(5)
+        hentDataFraVerstasjon()
+
+def yrarbeid():
+    try:
+        yrWbPlot.yrplot()
+    except:
+        time.sleep(20)
+        yrarbeid()
 
 def planlagtArbeid(): #denne threaden skal ta seg av alle tidsbestemte oppgaver
     print('thread er i gang')
@@ -30,7 +41,7 @@ def planlagtArbeid(): #denne threaden skal ta seg av alle tidsbestemte oppgaver
     print('kjor yrplot')
     hentDataFraVerstasjon()
     print("henter data fra verstasjon")
-    schedule.every(60).minutes.do(yrWbPlot.yrplot)
+    schedule.every(60).minutes.do(yrarbeid)
     schedule.every(1).minutes.do(hentDataFraVerstasjon)
     print("scheduler")
     while True:

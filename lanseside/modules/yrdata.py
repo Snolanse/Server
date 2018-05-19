@@ -2,10 +2,10 @@ import requests
 from bs4 import BeautifulSoup as soup
 
 def yrdata():
-    page = requests.get("https://www.yr.no/sted/Norge/Tr%C3%B8ndelag/Trondheim/Gran%C3%A5sen~211388/time_for_time_detaljert.html")
-    page_html = page.content
-    page_soup = soup(page_html, 'html.parser')
-    radata = page_soup.find("div",{"id": "Div1"}).findAll("table",{"id": "detaljert-tabell"}) #henter ut data fra side
+    page = requests.get("https://www.yr.no/sted/Norge/Tr%C3%B8ndelag/Trondheim/Gran%C3%A5sen~211388/time_for_time_detaljert.html") # Laster ned nettside fra yr
+    page_html = page.content # henter ut nettsidekoden fra nedlastingen
+    page_soup = soup(page_html, 'html.parser')  # Går gjennom koden og tolker den for å gjøre den søkbar
+    radata = page_soup.find("div",{"id": "Div1"}).findAll("table",{"id": "detaljert-tabell"}) # Finner og plukker ut tabell som har ønsket data
 
     json = {}
     for count,dag in enumerate(radata): #sorter gjennom data og lagrer

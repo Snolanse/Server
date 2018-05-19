@@ -8,7 +8,7 @@ Created on Tue Jan 16 16:52:48 2018
 import requests
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
-import numpy
+import numpy as np
 import time
 
 def getSData():
@@ -26,15 +26,66 @@ def getSData():
 
 def wetbulb(temp,hum):
     """rekner ut wet-bulb tempratur ut fra lufttempratur og luftfuktighet""" 
-    wbulb = (temp*numpy.arctan(0.151977*(hum + 8.313659)**0.5)
-            + numpy.arctan(temp + hum)
-            - numpy.arctan(hum - 1.676331)
-            + 0.00391838*hum**(3/2)*numpy.arctan(0.023101*hum)
+    wbulb = (temp*np.arctan(0.151977*(hum + 8.313659)**0.5)
+            + np.arctan(temp + hum)
+            - np.arctan(hum - 1.676331)
+            + 0.00391838*hum**(3/2)*np.arctan(0.023101*hum)
             - 4.686035)
     
     wbulb = round(float(wbulb),1)
     
     return wbulb
+
+
+def wetBulbMedAtmTrykk(luftfukt,temperatur,lufttrykk):
+    rh = luftfukt
+    tdb = temperatur
+    mbpressure = lufttrykk
+
+    es = 6.112 * np.exp((17.67 * tdb) / (tdb + 243.5))
+    e = es * (rh / 100)
+
+    edifference = 1
+    previousign = 1
+    incr = 10
+    twguess = 0
+
+    dewpoint = 243.5 * np.log((e) / (6.112)) / (17.67 - np.log((e / 6.112))) 
+
+    while (np.abs(edifference) > 0.005):
+        ewguess = 6.112 * np.exp((17.67 * twguess) / (twguess + 243.5)) 
+        eguess = ewguess - mbpressure * (tdb - twguess) * 0.00066 * (1 + (0.00115 * twguess)) 
+        edifference = e - eguess 
+
+        if (edifference == 0):
+            break 
+
+        else:
+            if (edifference < 0):
+                cursign = -1 
+
+                if (cursign != previousign):
+                    previousign = cursign 
+                    incr = incr / 10 
+
+                else:
+                    incr = incr 
+
+            else:
+                cursign = 1 
+
+                if (cursign != previousign):
+                    previousign = cursign 
+                    incr = incr / 10 
+
+                else:
+                    incr = incr 
+
+        twguess = twguess + incr * previousign 
+
+    twb = np.round(twguess * 100) / 100
+    return twb
+
 
 class PI:
     """Pi regulator"""
