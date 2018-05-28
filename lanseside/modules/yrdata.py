@@ -11,21 +11,21 @@ def yrdata():
     for count,dag in enumerate(radata): #sorter gjennom data og lagrer
         data = dag.tbody.findAll('tr')
         dagsholder = {}
-        for nr,dat in enumerate(data):
+        for nr,dat in enumerate(data):  #nummererer og henter ut data
             dataholder = {}
         
             time = dat.find('th').text[1:-1]
-            temp = dat.findAll('td')[1].text[:-1]
+            temp = dat.findAll('td')[1].text[:-1]       #henter ut data
             trykk = dat.findAll('td')[4].text
             luftfukt = dat.findAll('td')[5].text
         
             dataholder["time"] = time
-            dataholder["temp"] = temp
+            dataholder["temp"] = temp               #unoodvendig indirekte lagring
             dataholder["trykk"] = trykk
             dataholder["luftfukt"] = luftfukt
         
-            dagsholder[nr] = dataholder
+            dagsholder[nr] = dataholder     #oppdaterer dagsinfo med timeinfo
         
-        json[count] = dagsholder
+        json[count] = dagsholder    #lagrer dager
 
-    return json
+    return json     #returnerer svar

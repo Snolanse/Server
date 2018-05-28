@@ -25,14 +25,14 @@ def hentDataFraVerstasjon():
         conn.commit()
         conn.close() #lagre inn i database
     except:
-        time.sleep(5)
+        time.sleep(5)           #ingen kontakt = vent 5 sek og proov paa nytt
         hentDataFraVerstasjon()
 
-def yrarbeid():
+def yrarbeid():     # arbeidsfunksjon for henting av yrdata
     try:
         yrWbPlot.yrplot()
     except:
-        time.sleep(20)
+        time.sleep(20)      # noe gikk galt, vent 20 sek, proov paa nytt
         yrarbeid()
 
 def planlagtArbeid(): #denne threaden skal ta seg av alle tidsbestemte oppgaver
@@ -40,7 +40,7 @@ def planlagtArbeid(): #denne threaden skal ta seg av alle tidsbestemte oppgaver
     yrWbPlot.yrplot()
     print('kjor yrplot')
     hentDataFraVerstasjon()
-    print("henter data fra verstasjon")
+    print("henter data fra verstasjon")         # legger inn tidsbestemte oppgaver
     schedule.every(60).minutes.do(yrarbeid)
     schedule.every(1).minutes.do(hentDataFraVerstasjon)
     print("scheduler")

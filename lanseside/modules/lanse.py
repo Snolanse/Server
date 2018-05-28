@@ -22,7 +22,7 @@ def getSData():
     
     minRequest = requests.post(URL,headers=header, verify=False)
     
-    return minRequest.json()['data']
+    return minRequest.json()['data']    #retunerer data som en json
 
 def wetbulb(temp,hum):
     """rekner ut wet-bulb tempratur ut fra lufttempratur og luftfuktighet""" 
@@ -38,6 +38,7 @@ def wetbulb(temp,hum):
 
 
 def wetBulbMedAtmTrykk(luftfukt,temperatur,lufttrykk):
+    """rekner ut wet-bulb tempratur ut fra lufttempratur, atmosfæretrykk og luftfuktighet"""
     rh = luftfukt
     tdb = temperatur
     mbpressure = lufttrykk
@@ -87,7 +88,7 @@ def wetBulbMedAtmTrykk(luftfukt,temperatur,lufttrykk):
     return twb
 
 
-class PI:
+class PI:               #blir ikke brukt, var for bruk paa reguleringsventil
     """Pi regulator"""
     
     def __init__(self,P,I):
