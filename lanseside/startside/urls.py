@@ -4,7 +4,7 @@ from . import views
 from django.contrib import admin
 #from django.contrib.auth import views as auth_views
 
-urlpatterns = [
+urlpatterns = [                 #legger til url som leder sil sider
     url(r"^$", views.startside, name='startside'),
     url(r"^lanser$", views.lanser, name='lanser'),
     url(r"^valgtlanse$", views.valgtlanse, name='valgtlanse'),

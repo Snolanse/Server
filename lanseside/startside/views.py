@@ -1,3 +1,4 @@
+#henter inn nodvendige moduler
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
@@ -37,7 +38,7 @@ def master(request):
     if request.method == 'GET':
         return(render(request, 'Master/Master.html')) #viser mastersiden
     elif request.method == 'POST':
-        if request.POST['auto_man_samtlige'] == '1':
+        if request.POST['auto_man_samtlige'] == '1':        #utforer master-funksjoner
             #print("alle i auto")
             allelanser = Lanse.objects.all()
             allelanser.update(auto_man=1)
@@ -61,7 +62,7 @@ def csrf(request):      #enkel side som gir ut csrf tag
 def lanser(request):        #lansesiden, hoster bildet
     if request.method == 'GET':
         return(render(request, 'startside/lanser.html'))
-    elif request.method == 'POST':
+    elif request.method == 'POST':              #gir ut info om enkel lanse, blir ikke brukt
         x = int(request.POST['lanse'])
         lanse = Lanse.objects.get(lanse_nr = x)
         lanse = vars(lanse)
@@ -76,7 +77,7 @@ def valgtlanse(request):    #siden som henter inn spesifikk lanse
     if request.method == 'POST':
         try:
             args = {}
-            bronn = request.POST['bronnid']
+            bronn = request.POST['bronnid']     #henter info om lanse og sjekker om det er lanse eller nettside som etterspor info
             print(bronn)
             bronn_nr = int(bronn[(bronn.find('bronn'))+5:])
             lanse = Lanse.objects.all().order_by('plassering_bronn')[bronn_nr-1]
@@ -101,7 +102,7 @@ def valgtlanse(request):    #siden som henter inn spesifikk lanse
                 else:
                     args[x] = verstasjon[x]
 
-        except Exception as e:
+        except Exception as e:      #registrerer feil og printer ut, brukt til feilsoking
             exc_type, exc_obj, exc_tb = sys.exc_info()
             fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
             print(exc_type, fname, exc_tb.tb_lineno)
@@ -115,7 +116,7 @@ def valgtlanse(request):    #siden som henter inn spesifikk lanse
         return HttpResponse('')
 
 #@ensure_csrf_cookie
-def data(request):  
+def data(request):              #data, tar seg av kommunikasjon med lanseenheter
     if request.method == 'GET':
         return HttpResponse('')
     elif request.method == 'POST': 
@@ -132,9 +133,9 @@ def data(request):
             logg = langtidslagring(lanse_id=lanse.plassering_bronn, steg=lanse.modus, timestamp=ts, vanntrykk=lanse.vanntrykk)
             logg.save()
 
-        get = request.POST['get']
+        get = request.POST['get']       #sjekker om man vil hente eller levere ut data
         if get == '1':
-            if lanse.lokal_maling == 0:
+            if lanse.lokal_maling == 0:     #om lansen ikke tar lokale malinger, lever dette til lansen
                 try:
                     #vdata = getSData()
                     ver = Verdata.objects.get(id = 1)
@@ -156,7 +157,7 @@ def data(request):
             data = {'lanse':lanse, 'lansetype':lansetype, 'verstasjon':ver}
 
             return JsonResponse(data)
-        elif get == '0':
+        elif get == '0':                #lagrer info fra lanse
             for x in request.POST:
                 if hasattr(lanse,x):
                     if x == 'lanse_kategori':
@@ -180,7 +181,7 @@ def data(request):
         return HttpResponse('')
 
 
-def mylogin(request):
+def mylogin(request):       #handterer innlogging av brukere
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -194,6 +195,6 @@ def mylogin(request):
     else:
         return HttpResponseRedirect('/')
 
-def mylogout(request):
+def mylogout(request):      #logger ut brukeren
     logout(request)
     return HttpResponseRedirect('/')

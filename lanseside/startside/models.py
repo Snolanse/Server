@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Lansetype(models.Model):
+class Lansetype(models.Model):      #lagrer typer lanser
     class Meta:
         verbose_name_plural = "Lansetyper"
 
@@ -14,7 +14,7 @@ class Lansetype(models.Model):
 
 
 
-class Lanse(models.Model):
+class Lanse(models.Model):          lagrer driftsinformasjon om lanser
     class Meta:
         verbose_name_plural = "Lanser"
 
@@ -38,7 +38,7 @@ class Lanse(models.Model):
 
 
 
-class Verdata(models.Model):
+class Verdata(models.Model):        #lagrer verdata
     dew_2 = models.IntegerField(default=0)
     dew_1 = models.IntegerField(default=0)
     dew = models.IntegerField(default=0)
@@ -61,7 +61,7 @@ class Verdata(models.Model):
 
 
 
-class langtidslagring(models.Model):
+class langtidslagring(models.Model):    #lagtidslagrer data
     class Meta:
         verbose_name_plural = "Logg"
 
