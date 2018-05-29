@@ -42,7 +42,7 @@ def planlagtArbeid(): #denne threaden skal ta seg av alle tidsbestemte oppgaver
     hentDataFraVerstasjon()
     print("henter data fra verstasjon")         # legger inn tidsbestemte oppgaver
     schedule.every(60).minutes.do(yrarbeid)
-    schedule.every(1).minutes.do(hentDataFraVerstasjon)
+    #schedule.every(1).minutes.do(hentDataFraVerstasjon)
     print("scheduler")
     while True:
         #print("arbeidsthread")
