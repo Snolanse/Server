@@ -14,7 +14,7 @@ class Lansetype(models.Model):      #lagrer typer lanser
 
 
 
-class Lanse(models.Model):          lagrer driftsinformasjon om lanser
+class Lanse(models.Model):          #lagrer driftsinformasjon om lanser
     class Meta:
         verbose_name_plural = "Lanser"
 
