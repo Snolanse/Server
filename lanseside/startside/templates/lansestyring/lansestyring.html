@@ -52,14 +52,23 @@
                        {% else %}{{temp_2}}&#x2103;" {% endif %} readonly />
             </li>
             <li>
-                Vanntrykk:
-                <input name="vtrykk" type="text" id="vtrykk" value="{{vanntrykk}} Bar" readonly />
-            </li>
-            <li>
                 Luftfuktighet:
                 <input name="lfukt" type="text" id="lfukt" value="{% if lokal_maling %}{{luftfukt}}%"
                        {% else %}{{hum}}%" {% endif %} readonly />
             </li>
+            <li>
+                Vanntrykk:
+                <input name="vtrykk" type="text" id="vtrykk" value="{{vanntrykk}} Bar" readonly />
+            </li>
+            <li>
+                Vannstrømning:
+                <input name="vstrom" type="text" id="vstrom" value="{{flow}} l/min" readonly />
+            </li>
+            <li>
+                Vanntemperatur:
+                <input name="vtemp" type="text" id="vtemp" value="{{temperatur_vann}}&#x2103;" readonly />
+            </li>
+
             <!--Auto knapp-->
             <li>
                 <label class="container">

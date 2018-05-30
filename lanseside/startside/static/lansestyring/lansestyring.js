@@ -209,6 +209,8 @@ function oppd_side() {
         }
 
         document.getElementById('vtrykk').value = sidedata[0].lanse.vanntrykk.toString() + ' Bar';
+        document.getElementById('vstrom').value = sidedata[0].lanse.flow.toString() + ' l/min';
+        document.getElementById('vtemp').value = sidedata[0].lanse.temperatur_vann.toString() + '℃';
         m_steg = sidedata[0].lanse.modus.toString();
         auto = sidedata[0].lanse.auto_man;
 
